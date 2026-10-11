@@ -6,24 +6,24 @@ import skill.Skill;
 
 public abstract class Character {
 	
-	private int maxHp;
-	private int hp;
-	private int power;
-	private int defence;
-	private int magicPower;
-	private int magicDefence;
-	private int speed;
-	private String name;
-	private ArrayList<Skill> skills;
+	protected int maxHp;
+	protected int maxMp;
+	protected int hp;
+	protected int mp;
+	protected int power;
+	protected int magicPower;
+	protected int speed;
+	protected String name;
+	protected ArrayList<Skill> skills;
 	
-	public Character(int maxHp, int power, int defence, int magicPower, int magicDefence, int speed, String name){
+	public Character(int maxHp, int maxMp, int power, int magicPower, int speed, String name){
 		
 		this.maxHp = maxHp;
 		this.hp = maxHp;
+		this.maxMp = maxMp;
+		this.mp = maxMp;
 		this.power = power;
-		this.defence = defence;
 		this.magicPower = magicPower;
-		this.magicDefence = magicDefence;
 		this.speed = speed;
 		this.name = name;
 		this.skills = new ArrayList<>();
@@ -48,16 +48,8 @@ public abstract class Character {
 		return this.power;
 	}
 	
-	public int getDefence() {
-		return this.defence;
-	}
-	
 	public int getMagicPower() {
 		return this.magicPower;
-	}
-	
-	public int getMagicDefence() {
-		return this.magicDefence;
 	}
 	
 	public int getSpeed() {
@@ -66,6 +58,22 @@ public abstract class Character {
 	
 	public String getName() {
 		return this.name;
+	}
+	
+	public void setMaxHp(int hpUp) {
+		this.maxHp += hpUp;
+	}
+	public void setMaxMp(int mpUp) {
+		this.maxMp += mpUp;
+	}
+	public void setPower(int atkUp) {
+		this.power += atkUp;
+	}
+	public void setMagicPower(int mtkUp) {
+		this.magicPower += mtkUp;
+	}
+	public void setSpeed(int spdUp) {
+		this.speed += spdUp;
 	}
 	
 }

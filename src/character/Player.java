@@ -1,18 +1,31 @@
 package character;
 
+import system.GrowthSystem;
+
 public abstract class Player extends Character {
 	
-	private int level;
-	private int exp;
-	private int nextExp;
+	protected int level;
+	protected int exp;
 	
-	public Player(int maxHp, int power, int defence, int magicPower,
-			int magicDefence, int speed, String name, int level, int exp, int nextExp){
+	public Player(int maxHp, int maxMp, int power, int magicPower,
+			int speed, String name, int level, int exp){
 		
-		super(maxHp, power, defence, magicPower, magicDefence, speed, name);
+		super(maxHp, maxMp, power, magicPower, speed, name);
 		
 		
 	}
+	
+	public abstract int getHpGrowth(int nextLevel);
+	
+	public abstract int getMpGrowth(int nextLevel);
+	
+	public abstract int getAtkGrowth(int nextLevel);
+	
+	public abstract int getMatGrowth(int nextLevel);
+	
+	public abstract int getSpdGrowth(int nextLevel);
+	
+	public abstract void updateStats(int newLevel);
 	
 	public int getExp() {
 		return this.exp;
@@ -23,7 +36,8 @@ public abstract class Player extends Character {
 	}
 	
 	public int getNextExp() {
-		return this.nextExp;
+		int nextLevel = this.level + 1;
+		return GrowthSystem.EXP_TABLE[nextLevel] - this.exp;
 	}
 	
 	public void setExp(int earnedExp) {
@@ -33,5 +47,7 @@ public abstract class Player extends Character {
 	public void setLevel() {
 		this.level++;
 	}
-
+	
+	
+	
 }
