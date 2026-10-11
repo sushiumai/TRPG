@@ -1,0 +1,12 @@
+# 1. Javaのコンパイル済みファイル（絶対に無視する）
+*.class
+bin/
+
+# 2. エディタ（Eclipseなど）が勝手に作る個人設定ファイル
+.classpath
+.project
+.settings/
+
+# 3. OS（WindowsやMac）が勝手に作る隠しファイル
+.DS_Store
+Thumbs.db
