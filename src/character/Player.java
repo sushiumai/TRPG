@@ -15,16 +15,6 @@ public abstract class Player extends Character {
 		
 	}
 	
-	public abstract int getHpGrowth(int nextLevel);
-	
-	public abstract int getMpGrowth(int nextLevel);
-	
-	public abstract int getAtkGrowth(int nextLevel);
-	
-	public abstract int getMatGrowth(int nextLevel);
-	
-	public abstract int getSpdGrowth(int nextLevel);
-	
 	public abstract void updateStats(int newLevel);
 	
 	public int getExp() {

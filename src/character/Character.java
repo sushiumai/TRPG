@@ -60,20 +60,4 @@ public abstract class Character {
 		return this.name;
 	}
 	
-	public void setMaxHp(int hpUp) {
-		this.maxHp += hpUp;
-	}
-	public void setMaxMp(int mpUp) {
-		this.maxMp += mpUp;
-	}
-	public void setPower(int atkUp) {
-		this.power += atkUp;
-	}
-	public void setMagicPower(int mtkUp) {
-		this.magicPower += mtkUp;
-	}
-	public void setSpeed(int spdUp) {
-		this.speed += spdUp;
-	}
-	
 }

@@ -52,26 +52,6 @@ public class Hero extends Player {
 		super(HP[1], MP[1], ATK[1], MAT[1], SPD[1], "勇者", 1, 0);
 		
 	}
-	@Override
-	public int getHpGrowth(int nextLevel) {
-		return HP[nextLevel];
-	}
-	@Override
-	public int getMpGrowth(int nextLevel) {
-		return MP[nextLevel];
-	}
-	@Override
-	public int getAtkGrowth(int nextLevel) {
-		return ATK[nextLevel];
-	}
-	@Override
-	public int getMatGrowth(int nextLevel) {
-		return MAT[nextLevel];
-	}
-	@Override
-	public int getSpdGrowth(int nextLevel) {
-		return SPD[nextLevel];
-	}
 	
 	@Override
 	public void updateStats(int newLevel) {
