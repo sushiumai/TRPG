@@ -30,7 +30,8 @@ public class MainScreen extends JFrame {
 			}
 		});
 		
-		
+		BattleScreen battle = new BattleScreen();
+		this.add(battle);
 	}
-
+	
 }
