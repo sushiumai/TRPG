@@ -5,7 +5,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
-
 public class MainScreen extends JFrame {
 	
 	public static final String GAME_TITLE = "ドラゴンクエスト";
