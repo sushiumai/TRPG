@@ -6,7 +6,6 @@ import skill.Skill;
 
 public abstract class Character {
 	
-	//変数の定義
 	private int maxHp;
 	private int hp;
 	private int power;
@@ -14,13 +13,9 @@ public abstract class Character {
 	private int magicPower;
 	private int magicDefence;
 	private int speed;
-	
 	private String name;
-	
 	private ArrayList<Skill> skills;
 	
-	
-	//コンストラクタ
 	public Character(int maxHp, int power, int defence, int magicPower, int magicDefence, int speed, String name){
 		
 		this.maxHp = maxHp;
@@ -35,14 +30,11 @@ public abstract class Character {
 		
 	}
 	
-	//メソッドの定義
 	public void learnSkill(Skill skill) {
 		
 		this.skills.add(skill);
 		
 	}
-	
-	//ゲッターなどの定義
 	
 	public int getMaxHp() {
 		return this.maxHp;
