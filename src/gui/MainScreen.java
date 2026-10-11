@@ -1,9 +1,10 @@
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.Color;
-
 
 package gui;
+
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
+import javax.swing.JFrame;
 
 public class MainScreen extends JFrame {
 	
@@ -15,6 +16,21 @@ public class MainScreen extends JFrame {
 		this.setTitle(GAME_TITLE);
 		this.setUndecorated(true);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		
+		this.addKeyListener(new KeyAdapter(){
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+					
+					System.out.println("システムを終了します");
+					System.exit(0);
+				}
+			}
+		});
+		
+		
 	}
 
 }
