@@ -12,7 +12,8 @@ public abstract class Player extends Character {
 		
 		super(maxHp, maxMp, power, magicPower, speed, name);
 		
-		
+		this.level = level;
+		this.exp = exp;
 	}
 	
 	public abstract void updateStats(int newLevel);
@@ -34,7 +35,7 @@ public abstract class Player extends Character {
 		this.exp += earnedExp;
 	}
 	
-	public void setLevel() {
+	public void levelUp() {
 		this.level++;
 	}
 	

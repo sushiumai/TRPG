@@ -6,7 +6,7 @@ public abstract class AttackSkill extends Skill {
 
 	public AttackSkill() {
 		
-		super()
+		super();
 		
 	}
 

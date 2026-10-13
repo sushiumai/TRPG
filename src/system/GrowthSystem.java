@@ -22,7 +22,7 @@ public class GrowthSystem {
 		
 		while (target.getLevel() < MAX_LEVEL && target.getExp() >= EXP_TABLE[target.getLevel() + 1]) {
 			
-			target.setLevel();
+			target.levelUp();
 			
 			target.updateStats(target.getLevel());
 			
