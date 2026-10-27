@@ -6,7 +6,7 @@ public abstract class BattleAction {
 	protected Character actor;
 	protected Character target;
 	
-	protected BattleAction(Character actor, Character target) {
+	public BattleAction(Character actor, Character target) {
 		
 		this.actor = actor;
 		this.target = target;

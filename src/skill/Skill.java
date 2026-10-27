@@ -1,16 +1,15 @@
 package skill;
 
-import data.Element;
-
 public abstract class Skill {
 
 	//変数の定義	
+	protected String name;
 	protected int mpCost;
 	protected int learnLevel;
-	protected Element element;
 	
-	public Skill(int mpCost, int learnLevel) {
+	public Skill(String name, int mpCost, int learnLevel) {
 		
+		this.name = name;
 		this.mpCost = mpCost;
 		this.learnLevel = learnLevel;
 		
@@ -22,6 +21,9 @@ public abstract class Skill {
 	}
 	public int getlearnLevel() {
 		return this.learnLevel;
+	}
+	public String getName() {
+		return this.name;
 	}
 
 }

@@ -1,6 +1,7 @@
 package system;
 
 import character.Character;
+import data.SkillMaster;
 import skill.PhysicalSkill;
 
 public class PhysicalAction extends BattleAction {
@@ -13,13 +14,23 @@ public class PhysicalAction extends BattleAction {
 
 	@Override
 	protected void execute() {
-
-		if (actor.getMp() < skill.getMpCost()) {
+		if (this.actor.getHp() <= 0) {
 			return;
 		}
-		actor.reduceMp(skill.getMpCost());
-		int damage = system.BattleCalculation.calculateDamage(actor, target, skill.getMultiplier());
-		target.reduceHp(damage);
-	}
 
+		if (this.actor.getMp() < this.skill.getMpCost()) {
+			this.skill = SkillMaster.NORMAL_ATTACK;
+		}
+		this.actor.reduceMp(this.skill.getMpCost());
+		System.out.println(actor.getName() + "の" + skill.getName());
+		for (int i = 1 ; i <= skill.getCount() ; i++ ) {
+			int damage = system.BattleCalculation.calculateDamage(actor, target, skill.getMultiplier());
+			target.reduceHp(damage);
+			System.out.println(target.getName() + "に" + damage + "ダメージ");
+			
+		}
+		
+	}
+	
 }
+
