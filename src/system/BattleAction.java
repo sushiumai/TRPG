@@ -1,28 +1,24 @@
 package system;
 import character.Character;
 
-public class BattleAction {
+public abstract class BattleAction {
 	
-	private Character acter;
-	private Character target;
-	private String command;
+	protected Character actor;
+	protected Character target;
 	
-	public BattleAction(Character acter, Character target, String command) {
+	protected BattleAction(Character actor, Character target) {
 		
-		this.acter = acter;
+		this.actor = actor;
 		this.target = target;
-		this.command = command;
 	}
 	
+	protected abstract void execute();
 	
-	public Character getActer() {
-		return this.acter;
+	public Character getActor() {
+		return this.actor;
 	}
 	public Character getTarget() {
 		return this.target;
 	}
-	public String getCommand() {
-		return this.command;
-	}
-
+	
 }

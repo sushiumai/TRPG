@@ -45,7 +45,12 @@ public abstract class Character {
 	public int getHp() {
 		return this.hp;
 	}
-	
+	public int getMaxMp() {
+		return this.maxMp;
+	}
+	public int getMp() {
+		return this.mp;
+	}
 	public int getPower() {
 		return this.power;
 	}
@@ -64,6 +69,21 @@ public abstract class Character {
 	
 	public String getName() {
 		return this.name;
+	}
+	
+	public void reduceMp(int mpCost) {
+		this.mp -= mpCost;
+		
+		if (this.mp < 0) {
+			this.mp = 0;
+		}
+	}
+	public void reduceHp(int damage) {
+		this.hp -= damage;
+		
+		if (this.hp < 0) {
+			this.hp = 0;
+		}
 	}
 	
 }
