@@ -8,9 +8,9 @@ public abstract class Player extends Character {
 	protected int exp;
 	
 	public Player(int maxHp, int maxMp, int power, int magicPower,
-			int speed, String name, int level, int exp){
+			int defence, int speed, String name, int level, int exp){
 		
-		super(maxHp, maxMp, power, magicPower, speed, name);
+		super(maxHp, maxMp, power, magicPower, defence, speed, name);
 		
 		this.level = level;
 		this.exp = exp;

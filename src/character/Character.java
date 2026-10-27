@@ -12,11 +12,12 @@ public abstract class Character {
 	protected int mp;
 	protected int power;
 	protected int magicPower;
+	protected int defence;
 	protected int speed;
 	protected String name;
 	protected ArrayList<Skill> skills;
 	
-	public Character(int maxHp, int maxMp, int power, int magicPower, int speed, String name){
+	public Character(int maxHp, int maxMp, int power, int magicPower, int defence, int speed, String name){
 		
 		this.maxHp = maxHp;
 		this.hp = maxHp;
@@ -24,6 +25,7 @@ public abstract class Character {
 		this.mp = maxMp;
 		this.power = power;
 		this.magicPower = magicPower;
+		this.defence = defence;
 		this.speed = speed;
 		this.name = name;
 		this.skills = new ArrayList<>();
@@ -50,6 +52,10 @@ public abstract class Character {
 	
 	public int getMagicPower() {
 		return this.magicPower;
+	}
+	
+	public int getDefence() {
+		return this.defence;
 	}
 	
 	public int getSpeed() {

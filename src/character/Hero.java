@@ -38,18 +38,22 @@ public class Hero extends Player {
 			117, 125, 130, 135, 140	//Lv30
 	};
 	
+	
+	
 	private static final int[] SPD = {0,
-			4, 4, 6, 8, 10,		 //Lv5
-			10, 17, 20, 22, 31,	 //Lv10
-			35, 40, 48, 55, 64,	 //Lv15
-			70, 78, 84, 86, 88,	 //Lv20
-			90, 94, 98, 100, 105,//Lv25
-			107, 115, 120, 130 	 //Lv30
+			4, 4, 6, 8, 10,		   //Lv5
+			10, 17, 20, 22, 31,	   //Lv10
+			35, 40, 48, 55, 64,	   //Lv15
+			70, 78, 84, 86, 88,	   //Lv20
+			90, 94, 98, 100, 105,  //Lv25
+			107, 115, 120, 130, 150//Lv30
 	};
+	
+	//DFはSPDの半分とする
 
 	public Hero() {
 		
-		super(HP[1], MP[1], ATK[1], MAT[1], SPD[1], "勇者", 1, 0);
+		super(HP[1], MP[1], ATK[1], MAT[1], (SPD[1] / 2), SPD[1],  "勇者", 1, 0);
 		
 	}
 	
@@ -62,6 +66,7 @@ public class Hero extends Player {
 		this.power = ATK[newLevel];
 		this.magicPower = MAT[newLevel];
 		this.speed = SPD[newLevel];
+		this.defence = this.speed / 2;
 		this.level = newLevel;
 		this.exp = this.getExp();
 		
