@@ -8,15 +8,15 @@ import character.Player;
 import data.SkillMaster;
 public class BattleController {
 	
-	private BattleManager manager;
+	private TurnController manager;
 	
 	public BattleController() {
-		this.manager = new BattleManager();
+		this.manager = new TurnController();
 	}
 	
 	public void startBattle(List<Player> playerParty, List<Enemy> enemyParty) {
 		
-		System.out.println("魔物が現れた！");
+		gui.MessageViewer.println(data.MessageCatalog.ENCOUNT_LOG);
 		
 		while (isPartyAlive(playerParty) && isPartyAlive(enemyParty)) {
 			
@@ -36,19 +36,21 @@ public class BattleController {
 		
 		if (isPartyAlive(playerParty)) {
 			
-			System.out.println("魔物をたおした");
+			gui.MessageViewer.println(data.MessageCatalog.WIN_LOG);
 			
 			int totalExp = 0;
 			for (Enemy enemy : enemyParty) {
-				if (enemy.getHp() == 0) {
+				if (enemy.getHp() <= 0) {
 					totalExp += enemy.getDropExp();
 				}
 			}
 			for (Player ally : playerParty) {
 				system.GrowthSystem.giveExp(ally, totalExp);
 			}
+		} else {
+			gui.MessageViewer.println(data.MessageCatalog.LOSE_LOG);
+			
 		}
-		
 	}
 	
 	private boolean isPartyAlive(List<? extends Character> party) {
@@ -62,5 +64,6 @@ public class BattleController {
 		
 		return false;
 	}
+	
 
 }

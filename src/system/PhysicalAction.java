@@ -1,7 +1,9 @@
 package system;
 
 import character.Character;
+import data.MessageCatalog;
 import data.SkillMaster;
+import gui.MessageViewer;
 import skill.PhysicalSkill;
 
 public class PhysicalAction extends BattleAction {
@@ -22,14 +24,13 @@ public class PhysicalAction extends BattleAction {
 			this.skill = SkillMaster.NORMAL_ATTACK;
 		}
 		this.actor.reduceMp(this.skill.getMpCost());
-		System.out.println(actor.getName() + "の" + skill.getName());
-		for (int i = 1 ; i <= skill.getCount() ; i++ ) {
+		MessageViewer.println(String.format(MessageCatalog.SKILL_LOG, this.actor.getName(), this.skill.getName()));
+		for (int i = 0 ; i < skill.getCount() ; i++ ) {
 			int damage = system.BattleCalculation.calculateDamage(actor, target, skill.getMultiplier());
 			target.reduceHp(damage);
-			System.out.println(target.getName() + "に" + damage + "ダメージ");
+			MessageViewer.println(String.format(MessageCatalog.HIT_LOG, this.target.getName(), damage));
 			
 		}
-		
 	}
 	
 }

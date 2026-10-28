@@ -49,15 +49,15 @@ public abstract class Character {
 		if (this.weapon.get(0).getType() == WeaponType.NONE) {
 			return;
 		}
-		System.out.println(this.getName() + "は" + this.weapon.get(0).getName() + "を装備した");
+		gui.MessageViewer.println(String.format(data.MessageCatalog.EQUIP_LOG, this.getName(), this.weapon.get(0).getName()));
 		
 	}
 	public void unequip() {
 		if (this.weapon.get(0).getType() == WeaponType.NONE) {
-			System.out.println("なにも装備されていません");
+			gui.MessageViewer.println(String.format(data.MessageCatalog.UNEQUIP_ERROR_LOG, this.getName()));
 			return;
 		}
-		System.out.println(this.getName() + "は" + this.weapon.get(0).getName() + "を外した");
+		gui.MessageViewer.println(String.format(data.MessageCatalog.UNEQUIP_LOG, this.getName(), this.weapon.get(0).getName()));
 		this.weapon.clear();
 		this.weapon.add(WeaponFactory.createHands());
 	}

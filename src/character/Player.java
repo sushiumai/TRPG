@@ -31,8 +31,8 @@ public abstract class Player extends Character {
 		return GrowthSystem.EXP_TABLE[nextLevel] - this.exp;
 	}
 	
-	public void setExp(int earnedExp) {
-		this.exp += earnedExp;
+	public void setExp(int totalExp) {
+		this.exp = totalExp;
 	}
 	
 	public void levelUp() {

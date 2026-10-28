@@ -18,14 +18,14 @@ public class GrowthSystem {
 	
 	public static void giveExp(Player target, int earnedExp) {
 		
-		target.setExp(earnedExp);
-		System.out.println(target.getName() + "は" + earnedExp + "経験値を手に入れた");
+		target.setExp(target.getExp() + earnedExp);
+		gui.MessageViewer.println(String.format(data.MessageCatalog.EXP_LOG, earnedExp));
 		
 		while (target.getLevel() < MAX_LEVEL && target.getExp() >= EXP_TABLE[target.getLevel() + 1]) {
 			
 			target.levelUp();
 			target.updateStats(target.getLevel());
-			System.out.println(target.getName() + "はレベルが" + target.getLevel() + "に上がった");
+			gui.MessageViewer.println(String.format(data.MessageCatalog.LEVEL_UP_LOG, target.getName(), target.getLevel()));
 			
 		}
 		

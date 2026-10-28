@@ -2,10 +2,10 @@ package system;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BattleManager {
+public class TurnController {
 	private List<BattleAction> actionList;
 	
-	public BattleManager() {
+	public TurnController() {
 		this.actionList = new ArrayList<>();
 	}
 		
