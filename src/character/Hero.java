@@ -68,7 +68,6 @@ public class Hero extends Player {
 		this.speed = SPD[newLevel];
 		this.defence = this.speed / 2;
 		this.level = newLevel;
-		this.exp = this.getExp();
 		
 	}
 

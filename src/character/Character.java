@@ -2,10 +2,14 @@ package character;
 
 import java.util.ArrayList;
 
+import data.WeaponFactory;
+import data.WeaponType;
+import item.Weapon;
 import skill.Skill;
 
 public abstract class Character {
 	
+	private ArrayList<Weapon> weapon;
 	protected int maxHp;
 	protected int maxMp;
 	protected int hp;
@@ -29,19 +33,39 @@ public abstract class Character {
 		this.speed = speed;
 		this.name = name;
 		this.skills = new ArrayList<>();
+		this.weapon = new ArrayList<>();
+		this.equip(WeaponFactory.createHands());
 		
 	}
 	
 	public void learnSkill(Skill skill) {
-		
 		this.skills.add(skill);
 		
 	}
 	
+	public void equip(Weapon w) {
+		this.weapon.clear();
+		this.weapon.add(w);
+		if (this.weapon.get(0).getType() == WeaponType.NONE) {
+			return;
+		}
+		System.out.println(this.getName() + "は" + this.weapon.get(0).getName() + "を装備した");
+		
+	}
+	public void unequip() {
+		if (this.weapon.get(0).getType() == WeaponType.NONE) {
+			System.out.println("なにも装備されていません");
+			return;
+		}
+		System.out.println(this.getName() + "は" + this.weapon.get(0).getName() + "を外した");
+		this.weapon.clear();
+		this.weapon.add(WeaponFactory.createHands());
+	}
+	
+	
 	public int getMaxHp() {
 		return this.maxHp;
 	}
-	
 	public int getHp() {
 		return this.hp;
 	}
@@ -52,24 +76,29 @@ public abstract class Character {
 		return this.mp;
 	}
 	public int getPower() {
-		return this.power;
+		int totalPower = 0;
+		totalPower = totalPower + this.power + this.weapon.get(0).getPower();
+		return totalPower;
 	}
-	
 	public int getMagicPower() {
-		return this.magicPower;
+		if (this.weapon.isEmpty()) {
+			return this.magicPower;
+		} else {
+			int totalMagicPower = 0;
+			totalMagicPower = totalMagicPower + this.magicPower + this.weapon.get(0).getMagicPower();
+			return totalMagicPower;
+		}
 	}
-	
 	public int getDefence() {
 		return this.defence;
 	}
-	
 	public int getSpeed() {
 		return this.speed;
 	}
-	
 	public String getName() {
 		return this.name;
 	}
+
 	
 	public void reduceMp(int mpCost) {
 		this.mp -= mpCost;
