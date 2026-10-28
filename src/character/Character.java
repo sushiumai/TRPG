@@ -20,6 +20,7 @@ public abstract class Character {
 	protected int speed;
 	protected String name;
 	protected ArrayList<Skill> skills;
+	private boolean isDefending = false;
 	
 	public Character(int maxHp, int maxMp, int power, int magicPower, int defence, int speed, String name){
 		
@@ -113,6 +114,13 @@ public abstract class Character {
 		if (this.hp < 0) {
 			this.hp = 0;
 		}
+	}
+	public boolean isDefending() {
+		return this.isDefending;
+		
+	}
+	public void setDefending(boolean defending) {
+		this.isDefending = defending;
 	}
 	
 }

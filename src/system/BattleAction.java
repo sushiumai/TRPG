@@ -7,7 +7,7 @@ public abstract class BattleAction {
 	protected Character target;
 	
 	public BattleAction(Character actor, Character target) {
-		
+		actor.setDefending(false);
 		this.actor = actor;
 		this.target = target;
 	}

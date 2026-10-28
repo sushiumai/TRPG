@@ -23,9 +23,11 @@ public class BattleController {
 			for (Character ally : playerParty) {
 				
                 // ※敵のターゲット選びはとりあえず敵チームの先頭(0番目)にしています
-                manager.addAction(new PhysicalAction(ally, enemyParty.get(0), SkillMaster.DOUBLE_SLASH));
+                manager.addAction(system.CommandScanner.battleCommand(ally, enemyParty));
                 
 			}
+			
+			//敵の動きはいったん固定している
 			for (Character enemy : enemyParty) {
                 manager.addAction(new PhysicalAction(enemy, playerParty.get(0), SkillMaster.NORMAL_ATTACK));
 			}
