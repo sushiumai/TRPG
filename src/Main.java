@@ -1,11 +1,10 @@
-import java.util.ArrayList;
-import java.util.List;
-
 import character.Enemy;
 import character.Hero;
 import character.Player;
 import data.EnemyFactory;
 import data.WeaponFactory;
+import java.util.ArrayList;
+import java.util.List;
 import system.BattleController;
 
 public class Main {

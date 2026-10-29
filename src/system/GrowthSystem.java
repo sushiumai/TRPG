@@ -1,6 +1,7 @@
 package system;
 
 import character.Player;
+import skill.Skill;
 
 public class GrowthSystem {
 	
@@ -24,9 +25,14 @@ public class GrowthSystem {
 		while (target.getLevel() < MAX_LEVEL && target.getExp() >= EXP_TABLE[target.getLevel() + 1]) {
 			
 			target.levelUp();
-			target.updateStats(target.getLevel());
+			
 			gui.MessageViewer.println(String.format(data.MessageCatalog.LEVEL_UP_LOG, target.getName(), target.getLevel()));
 			
+			target.updateStatus(target.getLevel());
+			for (Skill skill : data.SkillMaster.getSkillsToLearn(target.getJob(), target.getLevel())) {
+				target.learnSkill(skill);
+				gui.MessageViewer.println(String.format(data.MessageCatalog.SKILL_LEARN_LOG, target.getName(), skill.getName()));
+			}
 		}
 		
 	}

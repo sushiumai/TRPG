@@ -1,8 +1,7 @@
 package system;
+import character.Character;
 import java.util.List;
 import java.util.Scanner;
-
-import character.Character;
 public class CommandScanner {
 	
 	public static BattleAction battleCommand(Character c, List<? extends Character> party) {
@@ -39,6 +38,7 @@ public class CommandScanner {
 		if (command == 2) {
 			return new GuardAction(c);
 		}
+		scanner.close();
 		return new PhysicalAction(c, party.get(0), data.SkillMaster.NORMAL_ATTACK);
 	}
 

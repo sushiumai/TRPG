@@ -1,7 +1,8 @@
 package character;
 
+import data.Job;
+
 public class Hero extends Player {
-	
 	private static final int[] HP = {0,
 			15, 22, 24, 31, 35,		//Lv5
 			38, 40, 46, 50, 54,		//Lv10
@@ -51,24 +52,10 @@ public class Hero extends Player {
 	
 	//DFはSPDの半分とする
 
+
 	public Hero() {
 		
-		super(HP[1], MP[1], ATK[1], MAT[1], (SPD[1] / 2), SPD[1],  "勇者", 1, 0);
-		
-	}
-	
-	@Override
-	public void updateStats(int newLevel) {
-		this.maxHp = HP[newLevel];
-		this.hp = HP[newLevel];
-		this.maxMp = MP[newLevel];
-		this.mp = MP[newLevel];
-		this.power = ATK[newLevel];
-		this.magicPower = MAT[newLevel];
-		this.speed = SPD[newLevel];
-		this.defence = this.speed / 2;
-		this.level = newLevel;
-		
+		super(HP, MP, ATK, MAT, SPD, Job.HERO, 1, 0);
 	}
 
 }

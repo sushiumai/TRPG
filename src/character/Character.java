@@ -1,28 +1,27 @@
 package character;
 
-import java.util.ArrayList;
-
 import data.WeaponFactory;
 import data.WeaponType;
 import item.Weapon;
+import java.util.ArrayList;
 import skill.Skill;
 
 public abstract class Character {
 	
-	private ArrayList<Weapon> weapon;
+	private final ArrayList<Weapon> weapon;
 	protected int maxHp;
 	protected int maxMp;
 	protected int hp;
 	protected int mp;
 	protected int power;
 	protected int magicPower;
-	protected int defence;
+	protected int defense;
 	protected int speed;
 	protected String name;
 	protected ArrayList<Skill> skills;
 	private boolean isDefending = false;
 	
-	public Character(int maxHp, int maxMp, int power, int magicPower, int defence, int speed, String name){
+	public Character(int maxHp, int maxMp, int power, int magicPower, int defense, int speed, String name){
 		
 		this.maxHp = maxHp;
 		this.hp = maxHp;
@@ -30,12 +29,12 @@ public abstract class Character {
 		this.mp = maxMp;
 		this.power = power;
 		this.magicPower = magicPower;
-		this.defence = defence;
+		this.defense = defense;
 		this.speed = speed;
 		this.name = name;
 		this.skills = new ArrayList<>();
 		this.weapon = new ArrayList<>();
-		this.equip(WeaponFactory.createHands());
+		this.weapon.add(WeaponFactory.createHands());
 		
 	}
 	
@@ -90,8 +89,8 @@ public abstract class Character {
 			return totalMagicPower;
 		}
 	}
-	public int getDefence() {
-		return this.defence;
+	public int getDefense() {
+		return this.defense;
 	}
 	public int getSpeed() {
 		return this.speed;
