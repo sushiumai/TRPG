@@ -27,6 +27,10 @@ public class BattleCommandController {
                 gui.MessageViewer.println(data.MessageCatalog.SKILL_COMMAND_LOG);
                 gui.MessageViewer.commandSelectMessage(actor.getSkills());
                 int skillIndex = gui.CommandScanner.readInt(actor.getSkills().size()) - 1;
+                if (actor.getMp() < actor.getSkills().get(skillIndex).getMpCost()) {
+                    gui.MessageViewer.printf(data.MessageCatalog.MP_ERROR_LOG, actor.getName());
+                    yield selectSkill(actor);
+                }
                 yield actor.getSkills().get(skillIndex);
             }
             case 3 -> data.SkillMaster.GUARD;
