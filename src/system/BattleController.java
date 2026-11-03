@@ -1,52 +1,50 @@
 package system;
 
-import java.util.List;
-
 import character.Character;
 import character.Enemy;
 import character.Player;
 import data.SkillMaster;
+import java.util.List;
 public class BattleController {
 	
-	private TurnController manager;
+	private final TurnController manager;
 	
 	public BattleController() {
 		this.manager = new TurnController();
 	}
 	
-	public void startBattle(List<Player> playerParty, List<Enemy> enemyParty) {
+	public void startBattle(List<Player> allies, List<Enemy> enemies) {
 		
 		gui.MessageViewer.println(data.MessageCatalog.ENCOUNT_LOG);
 		
-		while (isPartyAlive(playerParty) && isPartyAlive(enemyParty)) {
+		while (isPartyAlive(allies) && isPartyAlive(enemies)) {
 			
-			for (Character ally : playerParty) {
+			for (Character ally: allies) {
 				
-                // ※敵のターゲット選びはとりあえず敵チームの先頭(0番目)にしています
-                manager.addAction(system.CommandScanner.battleCommand(ally, enemyParty));
+                manager.addAction(BattleCommandController.selectAction(ally, enemies, allies));
                 
 			}
 			
 			//敵の動きはいったん固定している
-			for (Character enemy : enemyParty) {
-                manager.addAction(new PhysicalAction(enemy, playerParty.get(0), SkillMaster.NORMAL_ATTACK));
+			for (Character enemy : enemies) {
+                manager.addAction(new PhysicalAction(enemy, SkillMaster.NORMAL_ATTACK, List.of(allies.get(0))));
 			}
 			
 			manager.startTurn();
 			
 		}
 		
-		if (isPartyAlive(playerParty)) {
+		if (isPartyAlive(allies)) {
 			
 			gui.MessageViewer.println(data.MessageCatalog.WIN_LOG);
 			
 			int totalExp = 0;
-			for (Enemy enemy : enemyParty) {
+			for (Enemy enemy : enemies) {
 				if (enemy.getHp() <= 0) {
 					totalExp += enemy.getDropExp();
 				}
 			}
-			for (Player ally : playerParty) {
+			for (Player ally : allies) {
 				system.GrowthSystem.giveExp(ally, totalExp);
 			}
 		} else {

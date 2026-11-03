@@ -7,9 +7,9 @@ public class PhysicalSkill extends Skill {
 	double multiplier;
 	Element element;
 
-	public PhysicalSkill(String name, int mpCost, int learnLevel, int count, Element element, double multiplier, data.Job... learnJobs) {
+	public PhysicalSkill(String name, int mpCost, int learnLevel, int count, Element element, double multiplier, data.TargetType targetType, data.Job... learnJobs) {
 
-		super(name, mpCost, learnLevel, learnJobs);
+		super(name, mpCost, learnLevel, targetType, learnJobs);
 		this.element = element;
 		this.multiplier = multiplier;
 		this.count = count;

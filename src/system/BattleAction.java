@@ -4,12 +4,12 @@ import character.Character;
 public abstract class BattleAction {
 	
 	protected Character actor;
-	protected Character target;
+	private java.util.List<? extends Character> targets;
 	
-	public BattleAction(Character actor, Character target) {
+	public BattleAction(Character actor, java.util.List<? extends Character> targets) {
 		actor.setDefending(false);
 		this.actor = actor;
-		this.target = target;
+		this.targets = targets;
 	}
 	
 	protected abstract void execute();
@@ -17,8 +17,8 @@ public abstract class BattleAction {
 	public Character getActor() {
 		return this.actor;
 	}
-	public Character getTarget() {
-		return this.target;
+	public java.util.List<? extends Character> getTargets() {
+		return this.targets;
 	}
 	
 }

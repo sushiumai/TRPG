@@ -9,8 +9,8 @@ import skill.PhysicalSkill;
 public class PhysicalAction extends BattleAction {
 	private PhysicalSkill skill;
 
-	public PhysicalAction(Character actor, Character target, PhysicalSkill skill) {
-		super(actor, target);
+	public PhysicalAction(Character actor, PhysicalSkill skill, java.util.List<? extends Character> targets) {
+		super(actor, targets);
 		this.skill = skill;
 	}
 
@@ -25,12 +25,17 @@ public class PhysicalAction extends BattleAction {
 		}
 		this.actor.reduceMp(this.skill.getMpCost());
 		MessageViewer.println(String.format(MessageCatalog.SKILL_LOG, this.actor.getName(), this.skill.getName()));
-		for (int i = 0 ; i < skill.getCount() ; i++ ) {
-			int damage = system.BattleCalculation.calculateDamage(actor, target, skill.getMultiplier());
-			target.reduceHp(damage);
-			MessageViewer.println(String.format(MessageCatalog.HIT_LOG, this.target.getName(), damage));
-			
+		for (int i = 0; i < this.skill.getCount(); i++){
+			for (Character target : this.getTargets()) {
+				applyDamage(target);
+			}
 		}
+	}
+
+	private void applyDamage(Character target) {
+		int damage = system.BattleCalculation.calculateDamage(this.actor, target, this.skill.getMultiplier());
+		target.reduceHp(damage);
+		MessageViewer.println(String.format(data.MessageCatalog.DAMAGE_LOG, target.getName(), damage));
 	}
 	
 }

@@ -9,8 +9,10 @@ public class SkillMaster {
 
 	//PhysicalSkill(String name, int mpCost, int learnLevel, int count, Element element, double multiplier)
 
-	public static final PhysicalSkill NORMAL_ATTACK = register(new PhysicalSkill("こうげき", 0, 1, 1, Element.NONE, 1.0, data.Job.HERO, data.Job.THIEF, data.Job.MAGE, data.Job.PRIEST));
-	public static final PhysicalSkill DOUBLE_SLASH = register(new PhysicalSkill("連続斬り", 4, 3, 2, Element.NONE, 0.7, data.Job.HERO));
+	public static final PhysicalSkill NORMAL_ATTACK = register(new PhysicalSkill("こうげき", 0, 1, 1, Element.NONE, 1.0, data.TargetType.ENEMY, data.Job.HERO, data.Job.THIEF, data.Job.MAGE, data.Job.PRIEST));
+	public static final PhysicalSkill DOUBLE_SLASH = register(new PhysicalSkill("連続斬り", 4, 3, 2, Element.NONE, 0.7, data.TargetType.ENEMY, data.Job.HERO));
+
+	public static final skill.GuardSkill GUARD = register(new skill.GuardSkill("まもる", 0, 1, data.TargetType.SELF, data.Job.HERO, data.Job.THIEF, data.Job.MAGE, data.Job.PRIEST));
 
 	private static <T extends Skill> T register(T skill) {
 		ALL_SKILLS.add(skill);

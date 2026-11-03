@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TurnController {
-	private List<BattleAction> actionList;
+	private final List<BattleAction> actionList;
 	
 	public TurnController() {
 		this.actionList = new ArrayList<>();

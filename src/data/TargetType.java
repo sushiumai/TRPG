@@ -5,6 +5,8 @@ public enum TargetType {
     SELF,
     ALLY,
     ENEMY,
+    ALLIES,
+    ENEMIES,
     ALL_ALLY,
     ALL_ENEMY,
     ALL;
