@@ -13,7 +13,7 @@ public class MessageCatalog {
 	public static final String EXP_LOG = "%d経験値を手に入れた\n";
 	public static final String LEVEL_UP_LOG = "%sはレベルが%dに上がった\n";
 	public static final String MP_LOG = "%sは%dMP回復した\n";
-	public static final String MP_NOT_ENOUGH_LOG = "%sはMPが足りない\n";
+	public static final String MP_ERROR_LOG = "%sはMPが足りない\n";
 	public static final String ITEM_LOG = "%sは%sを使った\n";
 	public static final String SKILL_LEARN_LOG = "%sは%sを覚えた\n";
 	public static final String FIRST_COMMAND_LOG = "コマンドを選択してください\n1: たたかう\n2: スキル\n3: ぼうぎょ\n ";
