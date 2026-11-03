@@ -24,4 +24,10 @@ public class MessageViewer {
 		}
 	}
 
+	public static void skillSelectMessage(List<? extends skill.Skill> list) {
+		for (int i = 0; i < list.size(); i++) {
+			System.out.printf(data.MessageCatalog.SKILL_SELECT, i + 1, list.get(i).getName(), list.get(i).getMpCost());
+		}
+	}
+
 }
