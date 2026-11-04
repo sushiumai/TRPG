@@ -1,7 +1,5 @@
 package item;
 
-import data.WeaponType;
-
 public class Weapon {
 	
 	private int power;

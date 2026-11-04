@@ -1,6 +1,4 @@
-package data;
-
-import item.Weapon;
+package item;
 
 public class WeaponFactory {
 

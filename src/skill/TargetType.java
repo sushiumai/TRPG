@@ -1,4 +1,4 @@
-package data;
+package skill;
 
 public enum TargetType {
     NONE,

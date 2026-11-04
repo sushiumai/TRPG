@@ -1,4 +1,4 @@
-package system;
+package system.battle;
 
 import character.Character;
 import data.MessageCatalog;
@@ -33,7 +33,7 @@ public class PhysicalAction extends BattleAction {
 	}
 
 	private void applyDamage(Character target) {
-		int damage = system.BattleCalculation.calculateDamage(this.actor, target, this.skill.getMultiplier());
+		int damage = system.battle.BattleCalculation.calculateDamage(this.actor, target, this.skill.getMultiplier());
 		target.reduceHp(damage);
 		MessageViewer.println(String.format(data.MessageCatalog.DAMAGE_LOG, target.getName(), damage));
 	}

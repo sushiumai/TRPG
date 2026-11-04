@@ -1,6 +1,4 @@
-package data;
-
-import character.Enemy;
+package character;
 
 public class EnemyFactory {
 

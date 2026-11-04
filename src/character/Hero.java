@@ -1,6 +1,6 @@
 package character;
 
-import data.Job;
+import common.Job;
 
 public class Hero extends Player {
 	private static final int[] HP = {0,

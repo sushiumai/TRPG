@@ -23,16 +23,16 @@ public class MessageViewer {
 
 		for (int i = 0; i < list.size(); i++) {
 			String format = formatter.apply(list.get(i));
-			System.out.printf("%d. %s%n", i + 1, format);
+			printf(data.MessageCatalog.COMMAND_SELECT, i + 1, format);
 		}
 	}
 
-	public static void showAttackTargets(List<? extends character.Character> targets) {
+	public static void showTargets(List<? extends character.Character> targets) {
 
 		printNumberedList(targets, c-> c.getName());
 	}
 
-	public static void showSkills(List<skill.Skill> skills) {
+	public static void showSkills(List<? extends skill.Skill> skills) {
 
 		printNumberedList(skills, s-> String.format("%s (MP: %d)", s.getName(), s.getMpCost()));
 	}

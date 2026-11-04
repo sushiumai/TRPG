@@ -1,4 +1,4 @@
-package system;
+package system.battle;
 
 import character.Character;
 import character.Enemy;

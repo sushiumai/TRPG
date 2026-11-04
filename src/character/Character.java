@@ -1,8 +1,8 @@
 package character;
 
-import data.WeaponFactory;
-import data.WeaponType;
 import item.Weapon;
+import item.WeaponFactory;
+import item.WeaponType;
 import java.util.ArrayList;
 import skill.Skill;
 

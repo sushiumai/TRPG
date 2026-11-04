@@ -1,4 +1,4 @@
-package system;
+package system.battle;
 import character.Character;
 public class BattleCalculation {
 	

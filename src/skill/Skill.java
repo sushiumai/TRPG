@@ -1,17 +1,14 @@
 package skill;
-import data.Job;
-import data.TargetType;
-/**
- * Skill
- */
+import common.Job;
+
 public abstract class Skill {
 
 	//変数の定義	
-	private final String name;
-	private final int mpCost;
+	private final String  name;
+	private int mpCost;
 	private final int learnLevel;
 	private java.util.List<Job> learnJobs;
-	private final TargetType targetType;
+	private TargetType targetType;
 
 	public Skill(String name, int mpCost, int learnLevel, TargetType targetType, Job... learnJobs) {
 		
@@ -23,6 +20,13 @@ public abstract class Skill {
 		this.learnJobs = java.util.Arrays.asList(learnJobs);
 		
 		
+	}
+	//通常攻撃、防御など用
+	public Skill(String name, int mpCost, TargetType targetType){
+		this.name = name;
+		this.mpCost = mpCost;
+		this.targetType = targetType;
+		this.learnLevel = 1;
 	}
 	
 	
@@ -37,6 +41,15 @@ public abstract class Skill {
 	}
 	public TargetType getTargetType() {
 		return this.targetType;
+	}
+	public java.util.List<Job> getLearnJobs() {
+		return this.learnJobs;
+	}
+	public void setMpCost(int mpCost) {
+		this.mpCost = mpCost;
+	}
+	public void setTargetType(TargetType targetType) {
+		this.targetType = targetType;
 	}
 
 	public boolean canLearn(Job job, int level) {

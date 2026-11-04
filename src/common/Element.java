@@ -1,4 +1,4 @@
-package data;
+package common;
 
 public enum Element {
 	NONE, FIRE, WATER, ICE, THUNDER

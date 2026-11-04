@@ -1,5 +1,5 @@
 
-package gui;
+package gui.window;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;

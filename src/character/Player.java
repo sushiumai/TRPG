@@ -1,6 +1,6 @@
 package character;
 
-import data.Job;
+import common.Job;
 import system.GrowthSystem;
 
 public abstract class Player extends Character {

@@ -1,4 +1,4 @@
-package system;
+package system.battle;
 import character.Character;
 import java.util.List;
 import skill.Skill;
@@ -6,37 +6,46 @@ public class BattleCommandController {
 
     public static BattleAction selectAction(Character actor, List<? extends Character> enemies, List<? extends Character> allies){
 
+        
         Skill selectedSkill = selectSkill(actor);
 
         java.util.List<? extends Character> selectedTargets = selectTargets(actor, selectedSkill, enemies, allies);
 
         return createAction(actor, selectedSkill, selectedTargets);
+        
     }
 
     private static Skill selectSkill(Character actor){
-        gui.MessageViewer.println(data.MessageCatalog.FIRST_COMMAND_LOG);
-        int command = gui.CommandScanner.readInt(3);
+        while (true) {
+            gui.MessageViewer.println(data.MessageCatalog.FIRST_COMMAND_LOG);
+            int command = gui.CommandScanner.readInt(3);
+            switch (command) {
 
-        return  switch (command) {
-            case 1 -> data.SkillMaster.NORMAL_ATTACK;
-            case 2 -> {
-                if (actor.getSkills().isEmpty()) {
-                    gui.MessageViewer.println(data.MessageCatalog.SKILL_ERROR_LOG);
-                    yield selectSkill(actor);
+                case 1 -> {
+                    return data.SkillMaster.NORMAL_ATTACK;
                 }
-                gui.MessageViewer.println(data.MessageCatalog.SKILL_COMMAND_LOG);
-                gui.MessageViewer.showSkills(actor.getSkills());
-                int skillIndex = gui.CommandScanner.readInt(actor.getSkills().size()) - 1;
-                if (actor.getMp() < actor.getSkills().get(skillIndex).getMpCost()) {
-                    gui.MessageViewer.printf(data.MessageCatalog.MP_ERROR_LOG, actor.getName());
-                    yield selectSkill(actor);
+                case 2 -> {
+                    if (actor.getSkills().isEmpty()) {
+                        gui.MessageViewer.println(data.MessageCatalog.SKILL_ERROR_LOG);
+                        continue;
+                    }
+                    gui.MessageViewer.println(data.MessageCatalog.SKILL_COMMAND_LOG);
+                    gui.MessageViewer.showSkills(actor.getSkills());
+                    int skillIndex = gui.CommandScanner.readInt(actor.getSkills().size()) - 1;
+                    Skill selected = actor.getSkills().get(skillIndex);
+                    if (actor.getMp() < selected.getMpCost()) {
+                        gui.MessageViewer.printf(data.MessageCatalog.MP_ERROR_LOG, actor.getName());
+                        continue;
+                    }
+                    return selected;
                 }
-                yield actor.getSkills().get(skillIndex);
-            }
-            case 3 -> data.SkillMaster.GUARD;
+                case 3 -> {
+                    return data.SkillMaster.GUARD;
+                }
 
-            default -> throw new IllegalArgumentException("未対応のコマンドです: " + command); //TODO: ここに新しいコマンドを追加する場合は、ここにケースを追加してください
-        };
+                default -> throw new IllegalArgumentException("未対応のコマンドです: " + command); //TODO: ここに新しいコマンドを追加する場合は、ここにケースを追加してください
+            }    
+        }
     }
      
 
@@ -45,13 +54,13 @@ public class BattleCommandController {
             case SELF -> List.of(actor);
             case ENEMY -> {
                 gui.MessageViewer.println(data.MessageCatalog.TARGET_SELECT);
-                gui.MessageViewer.showAttackTargets(enemies);
+                gui.MessageViewer.showTargets(enemies);
                 int targetIndex = gui.CommandScanner.readInt(enemies.size()) - 1;
                 yield List.of(enemies.get(targetIndex));
             }
             case ALLY -> {
                 gui.MessageViewer.println(data.MessageCatalog.TARGET_SELECT);
-                gui.MessageViewer.showAttackTargets(allies);
+                gui.MessageViewer.showTargets(allies);
                 int targetIndex = gui.CommandScanner.readInt(allies.size()) - 1;
                 yield List.of(allies.get(targetIndex));
             }

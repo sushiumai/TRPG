@@ -1,11 +1,11 @@
 import character.Enemy;
+import character.EnemyFactory;
 import character.Hero;
 import character.Player;
-import data.EnemyFactory;
-import data.WeaponFactory;
+import item.WeaponFactory;
 import java.util.ArrayList;
 import java.util.List;
-import system.BattleController;
+import system.battle.BattleController;
 
 public class Main {
 
@@ -13,9 +13,9 @@ public class Main {
 
 		Hero hero = new Hero();
 		hero.equip(WeaponFactory.createOldSword());
-		
 		List<Player> playerParty = new ArrayList<>();
 		playerParty.add(hero);
+		system.GrowthSystem.giveExp(hero, 100);
 
 		List<Enemy> enemyParty = new ArrayList<>();
 		enemyParty.add(EnemyFactory.createSlime());

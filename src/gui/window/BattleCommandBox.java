@@ -1,4 +1,4 @@
-package gui;
+package gui.window;
 
 public class BattleCommandBox extends Window {
 	

@@ -1,9 +1,9 @@
-package system;
+package system.battle;
 import character.Character;
 import skill.GuardSkill;
-public class GuardAction extends system.BattleAction{
+public class GuardAction extends system.battle.BattleAction{
 
-	private GuardSkill skill;
+	private final GuardSkill skill;
 	
 	public GuardAction(Character actor, GuardSkill skill, java.util.List<? extends Character> targets) {
 		super(actor, targets);

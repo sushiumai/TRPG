@@ -1,4 +1,4 @@
-package system;
+package system.battle;
 import java.util.ArrayList;
 import java.util.List;
 
