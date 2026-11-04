@@ -2,7 +2,7 @@ package item;
 
 import data.WeaponType;
 
-public class Weapon implements data.Named {
+public class Weapon {
 	
 	private int power;
 	private int magicPower;
@@ -24,7 +24,6 @@ public class Weapon implements data.Named {
 	public int getMagicPower() {
 		return this.magicPower;
 	}
-        @Override
 	public String getName() {
 		return this.name;
 	}

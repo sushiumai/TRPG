@@ -6,7 +6,7 @@ import item.Weapon;
 import java.util.ArrayList;
 import skill.Skill;
 
-public abstract class Character implements data.Named {
+public abstract class Character {
 	
 	private final ArrayList<Weapon> weapon;
 	protected int maxHp;
@@ -95,7 +95,6 @@ public abstract class Character implements data.Named {
 	public int getSpeed() {
 		return this.speed;
 	}
-        @Override
 	public String getName() {
 		return this.name;
 	}
@@ -105,7 +104,6 @@ public abstract class Character implements data.Named {
 	public Weapon getWeapon() {
 		return this.weapon.get(0);
 	}
-
 	
 	public void reduceMp(int mpCost) {
 		this.mp -= mpCost;

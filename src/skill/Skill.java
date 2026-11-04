@@ -4,7 +4,7 @@ import data.TargetType;
 /**
  * Skill
  */
-public abstract class Skill implements data.Named {
+public abstract class Skill {
 
 	//変数の定義	
 	private final String name;
@@ -32,7 +32,6 @@ public abstract class Skill implements data.Named {
 	public int getLearnLevel() {
 		return this.learnLevel;
 	}
-        @Override
 	public String getName() {
 		return this.name;
 	}

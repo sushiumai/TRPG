@@ -25,7 +25,7 @@ public class BattleCommandController {
                     yield selectSkill(actor);
                 }
                 gui.MessageViewer.println(data.MessageCatalog.SKILL_COMMAND_LOG);
-                gui.MessageViewer.skillSelectMessage(actor.getSkills());
+                gui.MessageViewer.showSkills(actor.getSkills());
                 int skillIndex = gui.CommandScanner.readInt(actor.getSkills().size()) - 1;
                 if (actor.getMp() < actor.getSkills().get(skillIndex).getMpCost()) {
                     gui.MessageViewer.printf(data.MessageCatalog.MP_ERROR_LOG, actor.getName());
@@ -35,7 +35,7 @@ public class BattleCommandController {
             }
             case 3 -> data.SkillMaster.GUARD;
 
-            default -> selectSkill(actor); //TODO: ここに新しいコマンドを追加する場合は、ここにケースを追加してください
+            default -> throw new IllegalArgumentException("未対応のコマンドです: " + command); //TODO: ここに新しいコマンドを追加する場合は、ここにケースを追加してください
         };
     }
      
@@ -45,20 +45,20 @@ public class BattleCommandController {
             case SELF -> List.of(actor);
             case ENEMY -> {
                 gui.MessageViewer.println(data.MessageCatalog.TARGET_SELECT);
-                gui.MessageViewer.commandSelectMessage(enemies);
+                gui.MessageViewer.showAttackTargets(enemies);
                 int targetIndex = gui.CommandScanner.readInt(enemies.size()) - 1;
                 yield List.of(enemies.get(targetIndex));
             }
             case ALLY -> {
                 gui.MessageViewer.println(data.MessageCatalog.TARGET_SELECT);
-                gui.MessageViewer.commandSelectMessage(allies);
+                gui.MessageViewer.showAttackTargets(allies);
                 int targetIndex = gui.CommandScanner.readInt(allies.size()) - 1;
                 yield List.of(allies.get(targetIndex));
             }
             case ALL_ENEMY -> enemies;
             case ALL_ALLY -> allies;
             //TODO: ここに新しいターゲットタイプを追加する場合は、ここにケースを追加してください
-            default -> selectTargets(actor, skill, enemies, allies);
+            default -> throw new IllegalArgumentException("未対応のターゲットタイプです: " + skill.getTargetType());
         };
     }
 
@@ -66,7 +66,7 @@ public class BattleCommandController {
         return switch (skill) {
             case skill.PhysicalSkill physicalSkill -> new PhysicalAction(actor, physicalSkill, targets);
             case skill.GuardSkill guardSkill -> new GuardAction(actor, guardSkill, targets);
-            default -> createAction(actor, selectSkill(actor), targets); //TODO: ここに新しいスキルタイプを追加する場合は、ここにケースを追加してください
+            default -> throw new IllegalArgumentException("未対応のスキルタイプです: " + skill.getName()); //TODO: ここに新しいスキルタイプを追加する場合は、ここにケースを追加してください
         };
     }
 
