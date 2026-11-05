@@ -15,7 +15,6 @@ public class Player extends Character {
 		this.job = job;
 		this.level = level;
 		this.exp = exp;
-		applyStatus(this.level);
 	}
 	
 	public int getExp() {
