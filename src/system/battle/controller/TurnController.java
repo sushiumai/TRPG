@@ -19,7 +19,7 @@ public class TurnController {
 		allies.stream()
 				.map(ally -> BattleCommandController.selectAction(ally, enemies, allies))
 				.forEach(actionList::add);
-		enemies.stream() // 敵の動きはいったん固定している
+		enemies.stream() //TODO 敵の動きはいったん固定している
 				.map(enemy -> new PhysicalAction(enemy, SkillMaster.NORMAL_ATTACK, List.of(allies.getFirst())))
 				.forEach(actionList::add);
 		startTurn(actionList, allies, enemies);

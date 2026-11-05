@@ -1,37 +1,30 @@
 package character;
 
+import data.BattleStatus;
 import item.Weapon;
 import item.WeaponFactory;
 import item.WeaponType;
 import java.util.ArrayList;
+import java.util.List;
+
 import skill.Skill;
 
 public abstract class Character {
 	
 	private final ArrayList<Weapon> weapon;
-	protected int maxHp;
-	protected int maxMp;
-	protected int hp;
-	protected int mp;
-	protected int power;
-	protected int magicPower;
-	protected int defense;
-	protected int speed;
-	protected String name;
-	protected ArrayList<Skill> skills;
+	private int hp;
+	private int mp;
+	protected BattleStatus baseStatus;
+	private final String name;
+	protected List<Skill> skills;
 	private boolean isDefending = false;
 	
-	public Character(int maxHp, int maxMp, int power, int magicPower, int defense, int speed, String name){
+	protected Character(BattleStatus baseStatus, String name){
 		
-		this.maxHp = maxHp;
-		this.hp = maxHp;
-		this.maxMp = maxMp;
-		this.mp = maxMp;
-		this.power = power;
-		this.magicPower = magicPower;
-		this.defense = defense;
-		this.speed = speed;
+		this.baseStatus = baseStatus;
 		this.name = name;
+		this.hp = baseStatus.maxHp();
+		this.mp = baseStatus.maxMp();
 		this.skills = new ArrayList<>();
 		this.weapon = new ArrayList<>();
 		this.weapon.add(WeaponFactory.createHands());
@@ -46,63 +39,60 @@ public abstract class Character {
 	public void equip(Weapon w) {
 		this.weapon.clear();
 		this.weapon.add(w);
-		if (this.weapon.get(0).getType() == WeaponType.NONE) {
+		if (this.weapon.getFirst().getType() == WeaponType.NONE) {
 			return;
 		}
-		gui.MessageViewer.println(String.format(data.MessageCatalog.EQUIP_LOG, this.getName(), this.weapon.get(0).getName()));
+		gui.MessageViewer.println(String.format(data.MessageCatalog.EQUIP_LOG, this.getName(), this.weapon.getFirst().getName()));
 		
 	}
 	public void unequip() {
-		if (this.weapon.get(0).getType() == WeaponType.NONE) {
+		if (this.weapon.getFirst().getType() == null){
+			gui.MessageViewer.println("予期しないエラー：武器の種類がnullです。");
+			return;
+		}
+		if (this.weapon.getFirst().getType() == WeaponType.NONE) {
 			gui.MessageViewer.println(String.format(data.MessageCatalog.UNEQUIP_ERROR_LOG, this.getName()));
 			return;
 		}
-		gui.MessageViewer.println(String.format(data.MessageCatalog.UNEQUIP_LOG, this.getName(), this.weapon.get(0).getName()));
+		gui.MessageViewer.println(String.format(data.MessageCatalog.UNEQUIP_LOG, this.getName(), this.weapon.getFirst().getName()));
 		this.weapon.clear();
 		this.weapon.add(WeaponFactory.createHands());
 	}
 	
-	
-	public int getMaxHp() {
-		return this.maxHp;
+	public BattleStatus getBaseStatus() {
+		return this.baseStatus;
 	}
 	public int getHp() {
 		return this.hp;
 	}
-	public int getMaxMp() {
-		return this.maxMp;
-	}
 	public int getMp() {
 		return this.mp;
 	}
-	public int getPower() {
+	public int getTotalPower() {
 		int totalPower = 0;
-		totalPower = totalPower + this.power + this.weapon.get(0).getPower();
+		totalPower = totalPower + this.baseStatus.power() + this.weapon.getFirst().getPower();
 		return totalPower;
 	}
-	public int getMagicPower() {
-		if (this.weapon.isEmpty()) {
-			return this.magicPower;
-		} else {
+	public int getTotalMagicPower() {
 			int totalMagicPower = 0;
-			totalMagicPower = totalMagicPower + this.magicPower + this.weapon.get(0).getMagicPower();
+			totalMagicPower = totalMagicPower + this.baseStatus.magicPower() + this.weapon.getFirst().getMagicPower();
 			return totalMagicPower;
-		}
 	}
+	//TODO防具を作ったらいじる
 	public int getDefense() {
-		return this.defense;
+		return this.baseStatus.defense();
 	}
 	public int getSpeed() {
-		return this.speed;
+		return this.baseStatus.speed();
 	}
 	public String getName() {
 		return this.name;
 	}
-	public ArrayList<Skill> getSkills() {
+	public List<Skill> getSkills() {
 		return this.skills;
 	}
 	public Weapon getWeapon() {
-		return this.weapon.get(0);
+		return this.weapon.getFirst();
 	}
 	
 	public void reduceMp(int mpCost) {
@@ -126,5 +116,15 @@ public abstract class Character {
 	public void setDefending(boolean defending) {
 		this.isDefending = defending;
 	}
-	
+
+	public void updateBaseStatus(BattleStatus newStatus){
+		this.baseStatus = newStatus;
+	}
+
+	public void setHp(int hp) {
+		this.hp = hp;
+	}
+	public void setMp(int mp) {
+		this.mp = mp;
+	}
 }

@@ -1,6 +1,8 @@
 package data;
 
 public class MessageCatalog {
+	private MessageCatalog() {
+    }
 	
 	public static final String SKILL_LOG = "%sの%s\n";
 	public static final String DAMAGE_LOG = "%sに%dダメージ\n";

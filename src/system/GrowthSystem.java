@@ -36,7 +36,9 @@ public class GrowthSystem {
 			
 			gui.MessageViewer.println(String.format(data.MessageCatalog.LEVEL_UP_LOG, target.getName(), target.getLevel()));
 			
-			target.updateStatus(target.getLevel());
+			target.applyStatus(target.getLevel());
+			target.setHp(target.getBaseStatus().maxHp());
+			target.setMp(target.getBaseStatus().maxMp());
 			learnSkill(target);
 		}
 		

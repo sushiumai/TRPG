@@ -1,12 +1,13 @@
 package character;
 
+import data.EnemyMaster;
+
 public class EnemyFactory {
+	private EnemyFactory() {
+    }
 
-	//Enemy(int maxHp, int maxMp, int power, int magicPower,int defense, int speed, String name, int dropExp)
-
-	public static Enemy createSlime() {
-		return new Enemy(10, 0, 7, 0, 4, 3, "青スライム", 3);
-		
+	public static Enemy createEnemy(EnemyMaster enemyMaster) {
+		return new Enemy(enemyMaster);
 	}
 
 }

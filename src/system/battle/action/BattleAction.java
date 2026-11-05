@@ -17,7 +17,7 @@ public abstract class BattleAction {
 	public Character getActor() {
 		return this.actor;
 	}
-	public java.util.List<? extends Character> getTargets() {
+	public java.util.List<Character> getTargets() {
 		return new java.util.ArrayList<>(this.targets);
 	}
 	

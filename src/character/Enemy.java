@@ -1,14 +1,14 @@
 package character;
 
+import data.EnemyMaster;
 public class Enemy extends Character {
 
 	protected int dropExp;
 
-	public Enemy(int maxHp, int maxMp, int power, int magicPower,
-			int defense, int speed, String name, int dropExp) {
+	public Enemy(EnemyMaster enemyMaster) {
 
-		super(maxHp, maxMp, power, magicPower, defense, speed, name);
-		this.dropExp = dropExp;
+		super(enemyMaster.getBaseStatus(), enemyMaster.getName());
+		this.dropExp = enemyMaster.getDropExp();
 	}
 	
 	public int getDropExp() {

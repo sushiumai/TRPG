@@ -4,6 +4,9 @@ public class CommandScanner {
 	
 	private static final Scanner SCANNER = new Scanner(System.in);
 
+	private CommandScanner() {
+    }
+
 	public static int readInt(int max){
 		while (true){
 			if (SCANNER.hasNextInt()){
