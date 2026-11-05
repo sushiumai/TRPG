@@ -1,3 +1,5 @@
+package app;
+
 import character.Enemy;
 import character.EnemyFactory;
 import character.Hero;
@@ -5,7 +7,7 @@ import character.Player;
 import item.WeaponFactory;
 import java.util.ArrayList;
 import java.util.List;
-import system.battle.BattleController;
+import system.battle.controller.BattleController;
 
 public class Main {
 
@@ -20,8 +22,7 @@ public class Main {
 		List<Enemy> enemyParty = new ArrayList<>();
 		enemyParty.add(EnemyFactory.createSlime());
 
-		BattleController battle = new BattleController();
-		battle.startBattle(playerParty, enemyParty);
+		BattleController.startBattle(playerParty, enemyParty);
 
 		
 	}

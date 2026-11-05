@@ -40,12 +40,7 @@ public abstract class Player extends Character {
 	}
 	
 	public int getNextExp() {
-		int maxLevel = GrowthSystem.EXP_TABLE.length - 1;
-		int nextLevel = this.level + 1;
-		if (this.level == maxLevel) {
-			return 0;
-		}
-		return GrowthSystem.EXP_TABLE[nextLevel] - this.exp;
+		return GrowthSystem.getExpToNextLevel(this.level, this.exp);
 	}
 	
 	public void setExp(int totalExp) {

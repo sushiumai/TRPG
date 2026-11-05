@@ -1,10 +1,11 @@
-package system.battle;
+package system.battle.action;
 
 import character.Character;
 import data.MessageCatalog;
 import data.SkillMaster;
 import gui.MessageViewer;
 import skill.PhysicalSkill;
+import system.battle.BattleCalculation;
 
 public class PhysicalAction extends BattleAction {
 	private PhysicalSkill skill;
@@ -15,14 +16,11 @@ public class PhysicalAction extends BattleAction {
 	}
 
 	@Override
-	protected void execute() {
+	public void execute() {
 		if (this.actor.getHp() <= 0) {
 			return;
 		}
 
-		if (this.actor.getMp() < this.skill.getMpCost()) {
-			this.skill = SkillMaster.NORMAL_ATTACK;
-		}
 		this.actor.reduceMp(this.skill.getMpCost());
 		MessageViewer.println(String.format(MessageCatalog.SKILL_LOG, this.actor.getName(), this.skill.getName()));
 		for (int i = 0; i < this.skill.getCount(); i++){
@@ -33,10 +31,9 @@ public class PhysicalAction extends BattleAction {
 	}
 
 	private void applyDamage(Character target) {
-		int damage = system.battle.BattleCalculation.calculateDamage(this.actor, target, this.skill.getMultiplier());
+		int damage = BattleCalculation.calculateDamage(this.actor, target, this.skill.getMultiplier());
 		target.reduceHp(damage);
 		MessageViewer.println(String.format(data.MessageCatalog.DAMAGE_LOG, target.getName(), damage));
 	}
 	
 }
-

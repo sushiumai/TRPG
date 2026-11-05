@@ -9,6 +9,9 @@ import skill.PhysicalSkill;
 import skill.Skill;
 
 public class SkillMaster {
+	private SkillMaster(){}
+
+
 	private static final List<Skill> ALL_SKILLS = new ArrayList<>();
 
 	//PhysicalSkill(String name, int mpCost, int learnLevel, int count, Element element, double multiplier)

@@ -1,7 +1,7 @@
-package system.battle;
+package system.battle.action;
 import character.Character;
 import skill.GuardSkill;
-public class GuardAction extends system.battle.BattleAction{
+public class GuardAction extends BattleAction{
 
 	private final GuardSkill skill;
 	
@@ -11,7 +11,7 @@ public class GuardAction extends system.battle.BattleAction{
 	}
 	
 	@Override
-	protected void execute() {
+	public void execute() {
 		for (Character target : this.getTargets()) {
 			target.setDefending(true);
 		}

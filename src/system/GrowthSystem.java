@@ -3,8 +3,10 @@ import character.Player;
 import skill.Skill;
 
 public class GrowthSystem {
+
+	private GrowthSystem(){}
 	
-	public static final int[] EXP_TABLE = {
+	private static final int[] EXP_TABLE = {
 			0,
 			0, 7, 23, 47, 110,					//Lv5
 			220, 450, 800, 1300, 2000,			//Lv10
@@ -15,6 +17,13 @@ public class GrowthSystem {
 	};
 	
 	private static final int MAX_LEVEL = 30;
+
+	public static int getExpToNextLevel(int level, int currentExp) {
+		if (level >= MAX_LEVEL) {
+			return 0;
+		}
+		return EXP_TABLE[level + 1] - currentExp;
+	}
 	
 	public static void giveExp(Player target, int earnedExp) {
 		

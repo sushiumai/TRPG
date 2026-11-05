@@ -1,7 +1,10 @@
-package system.battle;
+package system.battle.controller;
 import character.Character;
 import java.util.List;
 import skill.Skill;
+import system.battle.action.BattleAction;
+import system.battle.action.GuardAction;
+import system.battle.action.PhysicalAction;
 public class BattleCommandController {
 
     public static BattleAction selectAction(Character actor, List<? extends Character> enemies, List<? extends Character> allies){
@@ -44,10 +47,9 @@ public class BattleCommandController {
                 }
 
                 default -> throw new IllegalArgumentException("未対応のコマンドです: " + command); //TODO: ここに新しいコマンドを追加する場合は、ここにケースを追加してください
-            }    
+            }
         }
     }
-     
 
     private static java.util.List<? extends Character> selectTargets(Character actor, Skill skill, List<? extends Character> enemies, List<? extends Character> allies) {
         return switch (skill.getTargetType()) {
