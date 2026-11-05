@@ -10,7 +10,7 @@ public abstract class Skill {
 	private java.util.List<Job> learnJobs;
 	private TargetType targetType;
 
-	public Skill(String name, int mpCost, int learnLevel, TargetType targetType, Job... learnJobs) {
+	protected Skill(String name, int mpCost, int learnLevel, TargetType targetType, Job... learnJobs) {
 		
 		this.name = name;
 		this.mpCost = mpCost;
@@ -22,7 +22,7 @@ public abstract class Skill {
 		
 	}
 	//通常攻撃、防御など用
-	public Skill(String name, int mpCost, TargetType targetType){
+	protected Skill(String name, int mpCost, TargetType targetType){
 		this.name = name;
 		this.mpCost = mpCost;
 		this.targetType = targetType;

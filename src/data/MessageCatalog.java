@@ -18,6 +18,7 @@ public class MessageCatalog {
 	public static final String MP_ERROR_LOG = "%sはMPが足りない\n";
 	public static final String ITEM_LOG = "%sは%sを使った\n";
 	public static final String SKILL_LEARN_LOG = "%sは%sを覚えた\n";
+	public static final String ADD_CONDITION = "%sは%s状態になった\n";
 	public static final String FIRST_COMMAND_LOG = "コマンドを選択してください\n1: たたかう\n2: スキル\n3: ぼうぎょ\n ";
 	public static final String SKILL_COMMAND_LOG = "スキルを選択してください\n";
 	public static final String COMMAND_ERROR_LOG = "※正しい番号を入力してください\n";

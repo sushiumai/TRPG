@@ -1,11 +1,15 @@
 package character;
 
+import condition.StatusCondition;
 import data.BattleStatus;
+import data.MessageCatalog;
 import item.Weapon;
 import item.WeaponFactory;
 import item.WeaponType;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 import skill.Skill;
 
@@ -17,7 +21,7 @@ public abstract class Character {
 	protected BattleStatus baseStatus;
 	private final String name;
 	protected List<Skill> skills;
-	private boolean isDefending = false;
+	private final List<StatusCondition> conditions;
 	
 	protected Character(BattleStatus baseStatus, String name){
 		
@@ -28,7 +32,7 @@ public abstract class Character {
 		this.skills = new ArrayList<>();
 		this.weapon = new ArrayList<>();
 		this.weapon.add(WeaponFactory.createHands());
-		
+		this.conditions = new ArrayList<>();
 	}
 	
 	public void learnSkill(Skill skill) {
@@ -57,6 +61,36 @@ public abstract class Character {
 		gui.MessageViewer.println(String.format(data.MessageCatalog.UNEQUIP_LOG, this.getName(), this.weapon.getFirst().getName()));
 		this.weapon.clear();
 		this.weapon.add(WeaponFactory.createHands());
+	}
+
+	public void addCondition(StatusCondition condition){
+		this.conditions.add(condition);
+		gui.MessageViewer.printf(MessageCatalog.ADD_CONDITION, this.name, condition.getName());
+	}
+	public boolean processTurnStart(){
+		boolean canAct = true;
+		for (StatusCondition condition : conditions){
+			condition.onTurnStart(this);
+			if (!condition.canAct(this)){
+				canAct = false;
+			}
+		}
+		conditions.removeIf(StatusCondition::isExpired);
+		return canAct;
+	}
+	public void processTurnEnd(){
+		for (StatusCondition condition : conditions){
+			condition.onTurnEnd(this);
+		}
+		conditions.removeIf(StatusCondition::isExpired);
+	}
+	public boolean hasCondition(Class<? extends StatusCondition> conditionClass){
+		for (StatusCondition c : conditions){
+			if (conditionClass.isInstance(c)){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public BattleStatus getBaseStatus() {
@@ -109,16 +143,15 @@ public abstract class Character {
 			this.hp = 0;
 		}
 	}
-	public boolean isDefending() {
-		return this.isDefending;
-		
-	}
-	public void setDefending(boolean defending) {
-		this.isDefending = defending;
-	}
 
 	public void updateBaseStatus(BattleStatus newStatus){
 		this.baseStatus = newStatus;
+	}
+	public boolean isAlive(){
+		return this.hp > 0;
+	}
+	public boolean isDead(){
+		return this.hp <= 0;
 	}
 
 	public void setHp(int hp) {

@@ -1,5 +1,8 @@
 package system.battle.action;
 import character.Character;
+import condition.GuardCondition;
+import data.MessageCatalog;
+import gui.MessageViewer;
 import skill.GuardSkill;
 public class GuardAction extends BattleAction{
 
@@ -12,10 +15,11 @@ public class GuardAction extends BattleAction{
 	
 	@Override
 	public void execute() {
+		MessageViewer.println(String.format(MessageCatalog.SKILL_LOG, this.actor.getName(), this.skill.getName()));
 		for (Character target : this.getTargets()) {
-			target.setDefending(true);
+			target.addCondition(new GuardCondition());
 		}
-		gui.MessageViewer.println(String.format(data.MessageCatalog.GUARD_LOG, actor.getName()));
+		this.actor.reduceMp(this.skill.getMpCost());
 	}
 
 }

@@ -2,7 +2,6 @@ package system.battle.action;
 
 import character.Character;
 import data.MessageCatalog;
-import data.SkillMaster;
 import gui.MessageViewer;
 import skill.PhysicalSkill;
 import system.battle.BattleCalculation;
@@ -20,7 +19,6 @@ public class PhysicalAction extends BattleAction {
 		if (this.actor.getHp() <= 0) {
 			return;
 		}
-
 		this.actor.reduceMp(this.skill.getMpCost());
 		MessageViewer.println(String.format(MessageCatalog.SKILL_LOG, this.actor.getName(), this.skill.getName()));
 		for (int i = 0; i < this.skill.getCount(); i++){

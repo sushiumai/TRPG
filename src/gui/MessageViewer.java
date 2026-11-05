@@ -3,6 +3,7 @@ package gui;
 import java.util.List;
 import java.util.function.Function;
 public class MessageViewer {
+	private MessageViewer(){}
 	
 	public static void println(String message) {
 		

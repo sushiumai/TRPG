@@ -1,7 +1,6 @@
 package character;
 
 import common.Job;
-import data.GrowthTable;
 import system.GrowthSystem;
 
 public class Player extends Character {

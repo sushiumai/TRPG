@@ -1,6 +1,7 @@
 package item;
 
 public class WeaponFactory {
+	private WeaponFactory(){}
 
 	//Weapon(int power, int magicPower, String name, WeaponType type)
 	

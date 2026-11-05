@@ -7,7 +7,6 @@ public abstract class BattleAction {
 	private java.util.List<? extends Character> targets;
 	
 	protected BattleAction(Character actor, java.util.List<? extends Character> targets) {
-		actor.setDefending(false);
 		this.actor = actor;
 		this.targets = targets;
 	}
