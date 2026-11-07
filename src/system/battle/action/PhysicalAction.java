@@ -20,7 +20,7 @@ public class PhysicalAction extends BattleAction {
 			return;
 		}
 		this.actor.reduceMp(this.skill.getMpCost());
-		MessageViewer.println(String.format(MessageCatalog.SKILL_LOG, this.actor.getName(), this.skill.getName()));
+		MessageViewer.printf(MessageCatalog.SKILL_LOG, this.actor.getName(), this.skill.getName());
 		for (int i = 0; i < this.skill.getCount(); i++){
 			for (Character target : this.getTargets()) {
 				applyDamage(target);
@@ -31,7 +31,7 @@ public class PhysicalAction extends BattleAction {
 	private void applyDamage(Character target) {
 		int damage = BattleCalculation.calculateDamage(this.actor, target, this.skill.getMultiplier());
 		target.reduceHp(damage);
-		MessageViewer.println(String.format(data.MessageCatalog.DAMAGE_LOG, target.getName(), damage));
+		MessageViewer.printf(data.MessageCatalog.DAMAGE_LOG, target.getName(), damage);
 	}
 	
 }

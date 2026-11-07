@@ -7,7 +7,7 @@ public class MessageCatalog {
 	public static final String SKILL_LOG = "%sの%s\n";
 	public static final String DAMAGE_LOG = "%sに%dダメージ\n";
 	public static final String GUARD_LOG = "%sは身を守っている\n";
-	public static final String ENCOUNT_LOG = "魔物があらわれた\n";
+	public static final String ENCOUNTER_LOG = "魔物があらわれた\n";
 	public static final String KILL_LOG = "%sをたおした\n";
 	public static final String SLAIN_LOG = "%sはたおれた\n";
 	public static final String WIN_LOG = "戦いに勝った！\n";

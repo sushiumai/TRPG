@@ -15,11 +15,14 @@ public class GuardAction extends BattleAction{
 	
 	@Override
 	public void execute() {
-		MessageViewer.println(String.format(MessageCatalog.SKILL_LOG, this.actor.getName(), this.skill.getName()));
+		MessageViewer.printf(MessageCatalog.SKILL_LOG, this.actor.getName(), this.skill.getName());
 		for (Character target : this.getTargets()) {
 			target.addCondition(new GuardCondition());
+			MessageViewer.printf(MessageCatalog.GUARD_LOG, target.getName());
 		}
 		this.actor.reduceMp(this.skill.getMpCost());
 	}
+
+
 
 }

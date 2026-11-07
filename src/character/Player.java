@@ -1,7 +1,6 @@
 package character;
 
 import common.Job;
-import system.GrowthSystem;
 
 public class Player extends Character {
 	
@@ -20,13 +19,8 @@ public class Player extends Character {
 	public int getExp() {
 		return this.exp;
 	}
-	
 	public int getLevel() {
 		return this.level;
-	}
-	
-	public int getNextExp() {
-		return GrowthSystem.getExpToNextLevel(this.level, this.exp);
 	}
 	
 	public void setExp(int totalExp) {
@@ -38,10 +32,6 @@ public class Player extends Character {
 	
 	public void levelUp() {
 		this.level++;
-	}
-
-	public void applyStatus(int newLevel) {
-		this.updateBaseStatus(this.job.getStatusAtLevel(newLevel));
 	}
 	
 }

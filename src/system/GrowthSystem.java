@@ -2,6 +2,8 @@ package system;
 import character.Player;
 import skill.Skill;
 
+import java.util.List;
+
 public class GrowthSystem {
 
 	private GrowthSystem(){}
@@ -25,29 +27,28 @@ public class GrowthSystem {
 		return EXP_TABLE[level + 1] - currentExp;
 	}
 	
-	public static void giveExp(Player target, int earnedExp) {
-		
+	public static LevelUpResult giveExp(Player target, int earnedExp) {
+		int oldLevel = target.getLevel();
 		target.setExp(target.getExp() + earnedExp);
-		gui.MessageViewer.println(String.format(data.MessageCatalog.EXP_LOG, earnedExp));
 		
 		while (target.getLevel() < MAX_LEVEL && target.getExp() >= EXP_TABLE[target.getLevel() + 1]) {
 			
 			target.levelUp();
 			
-			gui.MessageViewer.println(String.format(data.MessageCatalog.LEVEL_UP_LOG, target.getName(), target.getLevel()));
-			
-			target.applyStatus(target.getLevel());
+			target.updateBaseStatus(target.getJob().getStatusAtLevel(target.getLevel()));
 			target.setHp(target.getBaseStatus().maxHp());
 			target.setMp(target.getBaseStatus().maxMp());
+
 			learnSkill(target);
 		}
+		List<Skill> learnedSkills = data.SkillMaster.getSkillsToLearn(target.getJob(), target.getLevel());
 		
+		return new LevelUpResult(target.getLevel() > oldLevel, target.getLevel(), learnedSkills);
 	}
 
 	public static void learnSkill(Player target){
 		for (Skill skill : data.SkillMaster.getSkillsToLearn(target.getJob(), target.getLevel())) {
 				target.learnSkill(skill);
-				gui.MessageViewer.println(String.format(data.MessageCatalog.SKILL_LEARN_LOG, target.getName(), skill.getName()));
 		}
 	}
 

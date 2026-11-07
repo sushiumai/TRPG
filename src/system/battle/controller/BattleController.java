@@ -2,6 +2,9 @@ package system.battle.controller;
 
 import character.Enemy;
 import character.Player;
+import skill.Skill;
+import system.LevelUpResult;
+
 import java.util.List;
 public class BattleController {
 	
@@ -10,7 +13,7 @@ public class BattleController {
 	
 	public static void startBattle(List<Player> allies, List<Enemy> enemies) {
 
-		gui.MessageViewer.println(data.MessageCatalog.ENCOUNT_LOG);
+		gui.MessageViewer.println(data.MessageCatalog.ENCOUNTER_LOG);
 
 		while (TurnController.isPartyAlive(allies) && TurnController.isPartyAlive(enemies)) {
 
@@ -32,7 +35,14 @@ public class BattleController {
 					}
 				}
 				for (Player ally : allies) {
-					system.GrowthSystem.giveExp(ally, totalExp);
+					gui.MessageViewer.printf(data.MessageCatalog.EXP_LOG, totalExp);
+					LevelUpResult result = system.GrowthSystem.giveExp(ally, totalExp);
+					if (result.isLevelUp()) {
+						gui.MessageViewer.printf(data.MessageCatalog.LEVEL_UP_LOG, ally.getName(), result.newLevel());
+					}
+					for (Skill skill : result.learnedSkills()) {
+						gui.MessageViewer.printf(data.MessageCatalog.SKILL_LEARN_LOG, ally.getName(), skill.getName());
+					}
 				}
 			} else {
 				gui.MessageViewer.println(data.MessageCatalog.LOSE_LOG);

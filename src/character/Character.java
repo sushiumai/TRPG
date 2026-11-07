@@ -2,15 +2,10 @@ package character;
 
 import condition.StatusCondition;
 import data.BattleStatus;
-import data.MessageCatalog;
 import item.Weapon;
 import item.WeaponFactory;
-import item.WeaponType;
 import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.List;
-import java.util.Set;
-
 import skill.Skill;
 
 public abstract class Character {
@@ -43,29 +38,21 @@ public abstract class Character {
 	public void equip(Weapon w) {
 		this.weapon.clear();
 		this.weapon.add(w);
-		if (this.weapon.getFirst().getType() == WeaponType.NONE) {
-			return;
-		}
-		gui.MessageViewer.println(String.format(data.MessageCatalog.EQUIP_LOG, this.getName(), this.weapon.getFirst().getName()));
-		
+		gui.MessageViewer.printf(data.MessageCatalog.EQUIP_LOG, this.getName(), w.getName());//TODO:武器装備のコマンドを作った際、必ずここからは消す
 	}
 	public void unequip() {
 		if (this.weapon.getFirst().getType() == null){
 			gui.MessageViewer.println("予期しないエラー：武器の種類がnullです。");
 			return;
 		}
-		if (this.weapon.getFirst().getType() == WeaponType.NONE) {
-			gui.MessageViewer.println(String.format(data.MessageCatalog.UNEQUIP_ERROR_LOG, this.getName()));
-			return;
-		}
-		gui.MessageViewer.println(String.format(data.MessageCatalog.UNEQUIP_LOG, this.getName(), this.weapon.getFirst().getName()));
+		//TODO:武器装備のコマンドを作った際、必ずここからは消す
+		gui.MessageViewer.printf(data.MessageCatalog.UNEQUIP_LOG, this.getName(), this.weapon.getFirst().getName());
 		this.weapon.clear();
 		this.weapon.add(WeaponFactory.createHands());
 	}
 
 	public void addCondition(StatusCondition condition){
 		this.conditions.add(condition);
-		gui.MessageViewer.printf(MessageCatalog.ADD_CONDITION, this.name, condition.getName());
 	}
 	public boolean processTurnStart(){
 		boolean canAct = true;
