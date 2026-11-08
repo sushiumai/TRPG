@@ -22,6 +22,7 @@ public class Main {
 
 		List<Enemy> enemyParty = new ArrayList<>();
 		enemyParty.add(EnemyFactory.createEnemy(EnemyMaster.SLIME));
+		enemyParty.add(EnemyFactory.createEnemy(EnemyMaster.SLIME));
 
 		BattleController.startBattle(playerParty, enemyParty);
 

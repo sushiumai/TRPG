@@ -1,9 +1,13 @@
 package system.battle.action;
 import character.Character;
+import character.Enemy;
 import condition.GuardCondition;
 import data.MessageCatalog;
 import gui.MessageViewer;
 import skill.GuardSkill;
+
+import java.util.List;
+
 public class GuardAction extends BattleAction{
 
 	private final GuardSkill skill;
@@ -14,7 +18,7 @@ public class GuardAction extends BattleAction{
 	}
 	
 	@Override
-	public void execute() {
+	public void execute(List<Enemy> enemies) {
 		MessageViewer.printf(MessageCatalog.SKILL_LOG, this.actor.getName(), this.skill.getName());
 		for (Character target : this.getTargets()) {
 			target.addCondition(new GuardCondition());

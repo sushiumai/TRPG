@@ -1,6 +1,8 @@
 package system.battle.controller;
 
 import character.Character;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import character.Enemy;
@@ -20,6 +22,7 @@ public class BattleCommandController {
         Skill selectedSkill = selectSkill(actor);
 
         java.util.List<Character> selectedTargets = selectTargets(actor, selectedSkill, enemies, allies);
+
 
         return createAction(actor, selectedSkill, selectedTargets);
         
@@ -65,22 +68,27 @@ public class BattleCommandController {
     }
 
     private static java.util.List<Character> selectTargets(Character actor, Skill skill, List<Enemy> enemies, List<Player> allies) {
+        List<Enemy> aliveEnemies = new ArrayList<>(enemies);
+        aliveEnemies.removeIf(Character::isDead);
+        List<Player> aliveAllies = new ArrayList<>(allies);
+        aliveAllies.removeIf(Character::isDead);
+
         return switch (skill.getTargetType()) {
             case SELF -> List.of(actor);
             case ENEMY -> {
                 gui.MessageViewer.println(data.MessageCatalog.TARGET_SELECT);
-                gui.MessageViewer.showTargets(enemies);
-                int targetIndex = gui.CommandScanner.readInt(enemies.size()) - 1;
-                yield List.of(enemies.get(targetIndex));
+                gui.MessageViewer.showTargets(aliveEnemies);
+                int targetIndex = gui.CommandScanner.readInt(aliveEnemies.size()) - 1;
+                yield List.of(aliveEnemies.get(targetIndex));
             }
             case ALLY -> {
                 gui.MessageViewer.println(data.MessageCatalog.TARGET_SELECT);
-                gui.MessageViewer.showTargets(allies);
-                int targetIndex = gui.CommandScanner.readInt(allies.size()) - 1;
-                yield List.of(allies.get(targetIndex));
+                gui.MessageViewer.showTargets(aliveAllies);
+                int targetIndex = gui.CommandScanner.readInt(aliveAllies.size()) - 1;
+                yield List.of(aliveAllies.get(targetIndex));
             }
-            case ALL_ENEMY -> List.copyOf(enemies);
-            case ALL_ALLY -> List.copyOf(allies);
+            case ALL_ENEMY -> List.copyOf(aliveEnemies);
+            case ALL_ALLY -> List.copyOf(aliveAllies);
             //TODO: ここに新しいターゲットタイプを追加する場合は、ここにケースを追加してください
             default -> throw new IllegalArgumentException("未対応のターゲットタイプです: " + skill.getTargetType());
         };

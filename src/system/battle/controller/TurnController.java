@@ -11,7 +11,7 @@ import system.battle.action.PhysicalAction;
 public class TurnController {
     private TurnController(){}
 
-    public static void turnControll(List<Player> allies, List<Enemy> enemies){
+    public static void turnControl(List<Player> allies, List<Enemy> enemies){
         List<BattleAction> actionList = new ArrayList<>();
         allies.stream()
                 .map(ally -> BattleCommandController.selectAction(ally, enemies, allies))
@@ -33,7 +33,7 @@ public class TurnController {
             if (actor.isDead()){continue;}
             boolean canAct = actor.processTurnStart();
             if (canAct) {
-                currentAction.execute();
+                currentAction.execute(enemies);
             }
             actor.processTurnEnd();
         }

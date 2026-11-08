@@ -17,7 +17,7 @@ public class BattleController {
 
 		while (TurnController.isPartyAlive(allies) && TurnController.isPartyAlive(enemies)) {
 
-			TurnController.turnControll(allies, enemies);
+			TurnController.turnControl(allies, enemies);
 
 		}
 		judgeBattleResult(allies, enemies);
