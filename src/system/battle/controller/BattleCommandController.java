@@ -30,7 +30,7 @@ public class BattleCommandController {
 
     private static Skill selectSkill(Character actor){
         while (true) {
-            gui.MessageViewer.println(data.MessageCatalog.FIRST_COMMAND_LOG);
+            gui.MessageViewer.print(data.MessageCatalog.FIRST_COMMAND_LOG);
             int command = gui.CommandScanner.readInt(3);
             switch (command) {
 
@@ -53,10 +53,10 @@ public class BattleCommandController {
     }
     private static Skill selectSkillFromList(Character actor){
         if (actor.getSkills().isEmpty()) {
-            gui.MessageViewer.println(data.MessageCatalog.SKILL_ERROR_LOG);
+            gui.MessageViewer.print(data.MessageCatalog.SKILL_ERROR_LOG);
             return null;
         }
-        gui.MessageViewer.println(data.MessageCatalog.SKILL_COMMAND_LOG);
+        gui.MessageViewer.print(data.MessageCatalog.SKILL_COMMAND_LOG);
         gui.MessageViewer.showSkills(actor.getSkills());
         int skillIndex = gui.CommandScanner.readInt(actor.getSkills().size()) - 1;
         Skill selected = actor.getSkills().get(skillIndex);
@@ -76,13 +76,13 @@ public class BattleCommandController {
         return switch (skill.getTargetType()) {
             case SELF -> List.of(actor);
             case ENEMY -> {
-                gui.MessageViewer.println(data.MessageCatalog.TARGET_SELECT);
+                gui.MessageViewer.print(data.MessageCatalog.TARGET_SELECT);
                 gui.MessageViewer.showTargets(aliveEnemies);
                 int targetIndex = gui.CommandScanner.readInt(aliveEnemies.size()) - 1;
                 yield List.of(aliveEnemies.get(targetIndex));
             }
             case ALLY -> {
-                gui.MessageViewer.println(data.MessageCatalog.TARGET_SELECT);
+                gui.MessageViewer.print(data.MessageCatalog.TARGET_SELECT);
                 gui.MessageViewer.showTargets(aliveAllies);
                 int targetIndex = gui.CommandScanner.readInt(aliveAllies.size()) - 1;
                 yield List.of(aliveAllies.get(targetIndex));

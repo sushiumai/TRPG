@@ -1,15 +1,12 @@
 package gui;
 
+import character.Character;
+
 import java.util.List;
 import java.util.function.Function;
 public class MessageViewer {
 	private MessageViewer(){}
 	
-	public static void println(String message) {
-		
-		System.out.println(message);
-	}
-
 	public static void print(String message) {
 		
 		System.out.print(message);
@@ -30,7 +27,7 @@ public class MessageViewer {
 
 	public static void showTargets(List<? extends character.Character> targets) {
 
-		printNumberedList(targets, c-> c.getName());
+		printNumberedList(targets, Character::getName);
 	}
 
 	public static void showSkills(List<? extends skill.Skill> skills) {

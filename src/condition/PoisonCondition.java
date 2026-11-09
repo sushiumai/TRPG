@@ -11,10 +11,12 @@ public class PoisonCondition implements StatusCondition{
     @Override
     public void onTurnStart(Character character){}//ターンスタート時は何もしない
     @Override
-    public void onTurnEnd(Character character){
+    public int onTurnEnd(Character character){
+        if (isExpired()){return 0;}
         int poisonDamage = (int)(character.getBaseStatus().maxHp() * 0.1);
         character.reduceHp(poisonDamage);
         duration--;
+        return poisonDamage;
     }
     @Override
     public boolean isExpired(){

@@ -21,36 +21,42 @@ public class PhysicalAction extends BattleAction {
 
 	@Override
 	public void execute(List<Enemy> enemies) {
-		List<Enemy> aliveEnemies = this.updateTargets(enemies);
+		this.updateTargets(enemies);
 		this.actor.reduceMp(this.skill.getMpCost());
 		MessageViewer.printf(MessageCatalog.SKILL_LOG, this.actor.getName(), this.skill.getName());
 		for (int i = 0; i < this.skill.getCount(); i++){
 			for (Character target : this.getTargets()) {
 				applyDamage(target);
-		for (Enemy enemy : aliveEnemies) {
-			if (enemy.isDead()) {
-				MessageViewer.printf(MessageCatalog.KILL_LOG, enemy.getName());
-			}
-		}
+
 			}
 		}
 	}
 
 	private void applyDamage(Character target) {
+		if (target.isDead()) {
+			return;
+		}
 		int damage = BattleCalculation.calculateDamage(this.actor, target, this.skill.getMultiplier());
 		target.reduceHp(damage);
+		if (target.isDead()){
+			if (target instanceof Enemy){
+				MessageViewer.printf(MessageCatalog.KILL_LOG, target.getName());
+			} else {
+				MessageViewer.printf(MessageCatalog.SLAIN_LOG, target.getName());
+			}
+		}
 		MessageViewer.printf(data.MessageCatalog.DAMAGE_LOG, target.getName(), damage);
 	}
-	private List<Enemy> updateTargets(List<Enemy> enemies){
+	//TODO:敵行動時、target.isDeadで敵が敵を殴る挙動になる
+	private void updateTargets(List<Enemy> enemies){
 		this.targets.removeIf(Character::isDead);
 		List<Enemy> aliveEnemies = new ArrayList<>(enemies);
 		aliveEnemies.removeIf(Character::isDead);
 		if (this.targets.isEmpty()) {
 			Random random = new Random();
-			int index = random.nextInt(enemies.size());
-			this.setTargets(List.of(enemies.get(index)));
+			int index = random.nextInt(aliveEnemies.size());
+			this.setTargets(List.of(aliveEnemies.get(index)));
 		}
-		return aliveEnemies;
 
 	}
 	

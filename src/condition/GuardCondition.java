@@ -13,7 +13,7 @@ public class GuardCondition implements StatusCondition {
         duration--;
     }
     @Override
-    public void onTurnEnd(Character character){}//防御はターン終わり何もしない
+    public int onTurnEnd(Character character){return 0;}//防御はターン終わり何もしない
     @Override
     public boolean isExpired(){
         return duration <= 0;

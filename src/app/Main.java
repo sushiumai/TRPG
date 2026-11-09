@@ -18,15 +18,13 @@ public class Main {
 		hero.equip(WeaponFactory.createOldSword());
 		List<Player> playerParty = new ArrayList<>();
 		playerParty.add(hero);
-		system.GrowthSystem.giveExp(hero, 100);
-
+		system.GrowthSystem.giveExp(hero, 30);
+		hero.addCondition(new condition.PoisonCondition());
 		List<Enemy> enemyParty = new ArrayList<>();
-		enemyParty.add(EnemyFactory.createEnemy(EnemyMaster.SLIME));
 		enemyParty.add(EnemyFactory.createEnemy(EnemyMaster.SLIME));
 
 		BattleController.startBattle(playerParty, enemyParty);
 
-		
 	}
 
 }

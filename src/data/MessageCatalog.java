@@ -19,6 +19,8 @@ public class MessageCatalog {
 	public static final String ITEM_LOG = "%s は %s を使った\n";
 	public static final String SKILL_LEARN_LOG = "%s は %s を覚えた\n";
 	public static final String ADD_CONDITION = "%s は %s 状態になった\n";
+	public static final String REMOVE_CONDITION = "%s は %s 状態が解除された\n";
+    public static final String CONDITION_DAMAGE = "%s は %s の効果で %d ダメージを受けた\n";
 	public static final String FIRST_COMMAND_LOG = "コマンドを選択してください\n1: たたかう\n2: スキル\n3: ぼうぎょ\n ";
 	public static final String SKILL_COMMAND_LOG = "スキルを選択してください\n";
 	public static final String COMMAND_ERROR_LOG = "※正しい番号を入力してください\n";

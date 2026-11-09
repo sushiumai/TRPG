@@ -17,7 +17,7 @@ public class CommandScanner {
 		} else {
 			SCANNER.next();
 		}
-		MessageViewer.println(data.MessageCatalog.COMMAND_ERROR_LOG);
+		MessageViewer.print(data.MessageCatalog.COMMAND_ERROR_LOG);
 		}
 	}
 }

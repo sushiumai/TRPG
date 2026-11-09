@@ -13,7 +13,7 @@ public class BattleController {
 	
 	public static void startBattle(List<Player> allies, List<Enemy> enemies) {
 
-		gui.MessageViewer.println(data.MessageCatalog.ENCOUNTER_LOG);
+		gui.MessageViewer.print(data.MessageCatalog.ENCOUNTER_LOG);
 
 		while (TurnController.isPartyAlive(allies) && TurnController.isPartyAlive(enemies)) {
 
@@ -26,11 +26,11 @@ public class BattleController {
 	private static void judgeBattleResult(List<Player> allies, List<Enemy> enemies) {
 			if (TurnController.isPartyAlive(allies)) {
 
-				gui.MessageViewer.println(data.MessageCatalog.WIN_LOG);
+				gui.MessageViewer.print(data.MessageCatalog.WIN_LOG);
 
 				int totalExp = 0;
 				for (Enemy enemy : enemies) {
-					if (enemy.getHp() <= 0) {
+					if (enemy.isDead()) {
 						totalExp += enemy.getDropExp();
 					}
 				}
@@ -45,7 +45,7 @@ public class BattleController {
 					}
 				}
 			} else {
-				gui.MessageViewer.println(data.MessageCatalog.LOSE_LOG);
+				gui.MessageViewer.print(data.MessageCatalog.LOSE_LOG);
 				//TODO負けた後の処理は未実装
 
 			}
