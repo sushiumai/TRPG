@@ -10,3 +10,7 @@ bin/
 # 3. OS（WindowsやMac）が勝手に作る隠しファイル
 .DS_Store
 Thumbs.db
+src/TRPG.iml
+src/.idea/vcs.xml
+src/.idea/modules.xml
+src/.idea/misc.xml
