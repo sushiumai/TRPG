@@ -28,6 +28,7 @@ public class MessageCatalog {
 	public static final String TARGET_SELECT = "対象を選択してください\n";
 	public static final String COMMAND_SELECT = "%d : %s\n";
 	public static final String SKILL_SELECT = "%d : %s (MP: %d )\n";
+	public static final String RETURN_LOG = "0 : もどる\n";
 	
 	public static final String EQUIP_LOG = "%s は %s を装備した\n";
 	public static final String UNEQUIP_LOG = "%s は %s を外した\n";

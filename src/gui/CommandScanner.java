@@ -7,11 +7,11 @@ public class CommandScanner {
 	private CommandScanner() {
     }
 
-	public static int readInt(int max){
+	public static int readInt(int min, int max){
 		while (true){
 			if (SCANNER.hasNextInt()){
 			int index = SCANNER.nextInt();
-			if (index > 0 && index <= max) {
+			if (index >= min && index <= max) {
 				return index;
 			}
 		} else {

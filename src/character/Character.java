@@ -13,7 +13,7 @@ public abstract class Character {
 	private int hp;
 	private int mp;
 	protected BattleStatus baseStatus;
-	private final String name;
+	private String name;
 	protected List<Skill> skills;
 	private final List<StatusCondition> conditions;
 	private Weapon weapon;
@@ -139,5 +139,8 @@ public abstract class Character {
 	}
 	public void setMp(int mp) {
 		this.mp = mp;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 }

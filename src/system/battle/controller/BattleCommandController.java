@@ -7,6 +7,7 @@ import java.util.List;
 
 import character.Enemy;
 import character.Player;
+import data.MessageCatalog;
 import skill.Skill;
 import system.battle.action.BattleAction;
 import system.battle.action.GuardAction;
@@ -17,21 +18,23 @@ public class BattleCommandController {
     }
 
     public static BattleAction selectAction(Character actor, List<Enemy> enemies, List<Player> allies){
+        while(true) {
 
-        
-        Skill selectedSkill = selectSkill(actor);
+            Skill selectedSkill = selectSkill(actor);
 
-        java.util.List<Character> selectedTargets = selectTargets(actor, selectedSkill, enemies, allies);
+            java.util.List<Character> selectedTargets = selectTargets(actor, selectedSkill, enemies, allies);
+            if (selectedTargets == null) {
+                continue;
+            }
 
-
-        return createAction(actor, selectedSkill, selectedTargets);
-        
+            return createAction(actor, selectedSkill, selectedTargets);
+        }
     }
 
     private static Skill selectSkill(Character actor){
         while (true) {
             gui.MessageViewer.print(data.MessageCatalog.FIRST_COMMAND_LOG);
-            int command = gui.CommandScanner.readInt(3);
+            int command = gui.CommandScanner.readInt(1, 3);
             switch (command) {
 
                 case 1 -> {
@@ -57,8 +60,12 @@ public class BattleCommandController {
             return null;
         }
         gui.MessageViewer.print(data.MessageCatalog.SKILL_COMMAND_LOG);
+        gui.MessageViewer.print(MessageCatalog.RETURN_LOG);
         gui.MessageViewer.showSkills(actor.getSkills());
-        int skillIndex = gui.CommandScanner.readInt(actor.getSkills().size()) - 1;
+        int skillIndex = gui.CommandScanner.readInt(0, actor.getSkills().size()) - 1;
+        if (skillIndex == -1) {
+            return null;
+        }
         Skill selected = actor.getSkills().get(skillIndex);
         if (actor.getMp() < selected.getMpCost()) {
             gui.MessageViewer.printf(data.MessageCatalog.MP_ERROR_LOG, actor.getName());
@@ -75,23 +82,25 @@ public class BattleCommandController {
 
         return switch (skill.getTargetType()) {
             case SELF -> List.of(actor);
-            case ENEMY -> {
-                gui.MessageViewer.print(data.MessageCatalog.TARGET_SELECT);
-                gui.MessageViewer.showTargets(aliveEnemies);
-                int targetIndex = gui.CommandScanner.readInt(aliveEnemies.size()) - 1;
-                yield List.of(aliveEnemies.get(targetIndex));
-            }
-            case ALLY -> {
-                gui.MessageViewer.print(data.MessageCatalog.TARGET_SELECT);
-                gui.MessageViewer.showTargets(aliveAllies);
-                int targetIndex = gui.CommandScanner.readInt(aliveAllies.size()) - 1;
-                yield List.of(aliveAllies.get(targetIndex));
-            }
+            case ENEMY -> selectSingleTarget(aliveEnemies);
+
+            case ALLY -> selectSingleTarget(aliveAllies);
             case ALL_ENEMY -> List.copyOf(aliveEnemies);
             case ALL_ALLY -> List.copyOf(aliveAllies);
             //TODO: ここに新しいターゲットタイプを追加する場合は、ここにケースを追加してください
             default -> throw new IllegalArgumentException("未対応のターゲットタイプです: " + skill.getTargetType());
         };
+    }
+
+    private static List<Character> selectSingleTarget(List<? extends Character> targets) {
+        gui.MessageViewer.print(data.MessageCatalog.TARGET_SELECT);
+        gui.MessageViewer.print(data.MessageCatalog.RETURN_LOG);
+        gui.MessageViewer.showTargets(targets);
+        int targetIndex = gui.CommandScanner.readInt(0, targets.size()) - 1;
+        if (targetIndex == -1) {
+            return null;
+        }
+        return List.of(targets.get(targetIndex));
     }
 
     private static BattleAction createAction(Character actor, Skill skill, List<? extends Character> targets) {

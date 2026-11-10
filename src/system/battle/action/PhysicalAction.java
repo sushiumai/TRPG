@@ -38,6 +38,7 @@ public class PhysicalAction extends BattleAction {
 		}
 		int damage = BattleCalculation.calculateDamage(this.actor, target, this.skill.getMultiplier());
 		target.reduceHp(damage);
+		MessageViewer.printf(data.MessageCatalog.DAMAGE_LOG, target.getName(), damage);
 		if (target.isDead()){
 			if (target instanceof Enemy){
 				MessageViewer.printf(MessageCatalog.KILL_LOG, target.getName());
@@ -45,7 +46,7 @@ public class PhysicalAction extends BattleAction {
 				MessageViewer.printf(MessageCatalog.SLAIN_LOG, target.getName());
 			}
 		}
-		MessageViewer.printf(data.MessageCatalog.DAMAGE_LOG, target.getName(), damage);
+
 	}
 	//TODO:敵行動時、target.isDeadで敵が敵を殴る挙動になる
 	private void updateTargets(List<Enemy> enemies){
