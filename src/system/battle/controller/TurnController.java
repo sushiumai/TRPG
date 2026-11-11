@@ -32,7 +32,7 @@ public class TurnController {
 
             Character actor = currentAction.getActor();
             if (actor.isDead()){continue;}
-            boolean canAct = actor.processTurnStart();
+            boolean canAct = processTurnStart(actor);
             if (canAct) {
                 currentAction.execute(enemies);
             }
@@ -50,7 +50,19 @@ public class TurnController {
         }
         return false;
     }
-    public static void processTurnEnd(Character character){
+
+    private static boolean processTurnStart(Character character){
+        boolean canAct = true;
+        for (StatusCondition condition : character.getConditions()){
+            condition.onTurnStart(character);
+            if (!condition.canAct(character)){
+                canAct = false;
+            }
+        }
+        character.getConditions().removeIf(StatusCondition::isExpired);
+        return canAct;
+    }
+    private static void processTurnEnd(Character character){
         for (StatusCondition condition : character.getConditions()){
             int damage = condition.onTurnEnd(character);
             if (damage > 0){

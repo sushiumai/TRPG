@@ -1,6 +1,6 @@
 package item;
 
 public enum WeaponType {
-	NONE, SWORD, WAND, DAGGER
+	NONE, HANDS, SWORD, WAND, DAGGER
 
 }

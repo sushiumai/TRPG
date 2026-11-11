@@ -1,11 +1,11 @@
 package item;
 
-public class Weapon {
+public class Weapon implements Item {
 	
-	private int power;
-	private int magicPower;
-	private WeaponType type;
-	private String name;
+	private final int power;
+	private final int magicPower;
+	private final WeaponType type;
+	private final String name;
 	
 	public Weapon(int power, int magicPower, String name, WeaponType type) {
 		
@@ -22,6 +22,8 @@ public class Weapon {
 	public int getMagicPower() {
 		return this.magicPower;
 	}
+
+	@Override
 	public String getName() {
 		return this.name;
 	}

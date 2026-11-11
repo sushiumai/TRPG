@@ -2,7 +2,7 @@ package data;
 
 public enum EnemyMaster {
 
-    SLIME(new BattleStatus(10, 0, 7, 0, 4, 3), "青スライム", 3);
+    SLIME(new BattleStatus(8, 0, 5, 0, 2, 3), "青スライム", 3);
 
     private final BattleStatus baseStatus;
     private final String name;

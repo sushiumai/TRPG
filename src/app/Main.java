@@ -5,6 +5,7 @@ import character.EnemyFactory;
 import character.Player;
 import common.Job;
 import data.EnemyMaster;
+import item.Equipment;
 import item.WeaponFactory;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		Player hero = character.PlayerFactory.createPlayer(Job.HERO);
-		hero.equip(WeaponFactory.createOldSword());
+		hero.equipWeapon(Equipment.OLDSWORD);
 		List<Player> playerParty = new ArrayList<>();
 		playerParty.add(hero);
 		system.GrowthSystem.giveExp(hero, 30);

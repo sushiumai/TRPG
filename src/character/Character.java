@@ -2,6 +2,7 @@ package character;
 
 import condition.StatusCondition;
 import data.BattleStatus;
+import item.Equipment;
 import item.Weapon;
 import item.WeaponFactory;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public abstract class Character {
 	private String name;
 	protected List<Skill> skills;
 	private final List<StatusCondition> conditions;
-	private Weapon weapon;
+	private Equipment currentWeapon;
 	protected Character(BattleStatus baseStatus, String name){
 		
 		this.baseStatus = baseStatus;
@@ -24,7 +25,7 @@ public abstract class Character {
 		this.hp = baseStatus.maxHp();
 		this.mp = baseStatus.maxMp();
 		this.skills = new ArrayList<>();
-		this.weapon = WeaponFactory.createHands();
+		this.currentWeapon = Equipment.HANDS;
 		this.conditions = new ArrayList<>();
 	}
 	
@@ -33,34 +34,24 @@ public abstract class Character {
 		
 	}
 	
-	public void equip(Weapon w) {
-		this.weapon = w;
-		gui.MessageViewer.printf(data.MessageCatalog.EQUIP_LOG, this.getName(), w.getName());//TODO:武器装備のコマンドを作った際、必ずここからは消す
+	public void equipWeapon(Equipment newWeapon) {
+		this.currentWeapon = newWeapon;
+		gui.MessageViewer.printf(data.MessageCatalog.EQUIP_LOG, this.getName(), newWeapon.getName());//TODO:武器装備のコマンドを作った際、必ずここからは消す
 	}
-	public void unequip() {
-		if (this.weapon.getType() == null){
+	public void unequipWeapon() {
+		if (this.currentWeapon.getType() == null){
 			gui.MessageViewer.print("予期しないエラー：武器の種類がnullです。");
 			return;
 		}
 		//TODO:武器装備のコマンドを作った際、必ずここからは消す
-		gui.MessageViewer.printf(data.MessageCatalog.UNEQUIP_LOG, this.getName(), this.weapon.getName());
-		this.weapon = WeaponFactory.createHands();
+		gui.MessageViewer.printf(data.MessageCatalog.UNEQUIP_LOG, this.getName(), this.currentWeapon.getName());
+		this.currentWeapon = Equipment.HANDS;
 	}
 
 	public void addCondition(StatusCondition condition){
 		this.conditions.add(condition);
 	}
-	public boolean processTurnStart(){
-		boolean canAct = true;
-		for (StatusCondition condition : conditions){
-			condition.onTurnStart(this);
-			if (!condition.canAct(this)){
-				canAct = false;
-			}
-		}
-		conditions.removeIf(StatusCondition::isExpired);
-		return canAct;
-	}
+
 
 	public boolean hasCondition(Class<? extends StatusCondition> conditionClass){
 		for (StatusCondition c : conditions){
@@ -82,12 +73,12 @@ public abstract class Character {
 	}
 	public int getTotalPower() {
 		int totalPower = 0;
-		totalPower = totalPower + this.baseStatus.power() + this.weapon.getPower();
+		totalPower = totalPower + this.baseStatus.power() + this.currentWeapon.getPower();
 		return totalPower;
 	}
 	public int getTotalMagicPower() {
 			int totalMagicPower = 0;
-			totalMagicPower = totalMagicPower + this.baseStatus.magicPower() + this.weapon.getMagicPower();
+			totalMagicPower = totalMagicPower + this.baseStatus.magicPower() + this.currentWeapon.getMagicPower();
 			return totalMagicPower;
 	}
 	//TODO防具を作ったらいじる
@@ -103,8 +94,8 @@ public abstract class Character {
 	public List<Skill> getSkills() {
 		return this.skills;
 	}
-	public Weapon getWeapon() {
-		return this.weapon;
+	public Equipment getCurrentWeapon() {
+		return this.currentWeapon;
 	}
 	public List<StatusCondition> getConditions() {
 		return this.conditions;
